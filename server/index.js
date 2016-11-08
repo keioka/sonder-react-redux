@@ -46,18 +46,18 @@ const debug = require('debug')("Server")
 //************************
 // Container & Component
 //************************
-import HTML from '../component/html'
+import HTML from '../shared/component/html'
 
 //************************
 // Routes
 //************************
-import createRoutes from '../routes'
+import createRoutes from '../shared/routes'
 
 
 //****************************
 // Config and Intialize store
 //****************************
-import store from '../store/configureStore'
+import store from '../shared/store/configureStore'
 
 
 //****************
