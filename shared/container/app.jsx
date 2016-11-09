@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 
+function mapStateToProps(state) {
+  return {}
+}
+
+@connect(mapStateToProps)
 class App extends Component {
   
   constructor(){

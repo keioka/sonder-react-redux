@@ -5,14 +5,42 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "DEBUG='Server, Config' nodemon --watch server --exec babel-node -- ./server/index.js"
+    "server": "better-npm-run server",
+    "build": "better-npm-run build",
+    "watch": "better-npm-run watch"
+  },
+  "betterScripts": {
+    "server": {
+      "command": "nodemon --watch server --exec babel-node -- ./server/index.js",
+      "env": {
+        "DEBUG": "App:*"
+      }
+    },
+    "build": {
+      "command": "webpack --devtool --display-error-details --verbose --colors --progress --config ./client/webpack/config.dev.js",
+      "env": {
+        "NODE_ENV": "development",
+        "DEBUG": "Build:*"
+      }
+    },
+    "watch": {
+      "command": "node ./client/webpack/webpack-dev-server.js",
+      "env": {
+        "UV_THREADPOOL_SIZE": 100,
+        "NODE_PATH": "./src",
+        "PORT": 5000,
+        "APIPORT": 5050
+      }
+    }
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "babel": "^6.5.2",
     "babel-cli": "^6.18.0",
     "babel-eslint": "^6.1.2",
+    "babel-loader": "^6.2.7",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
@@ -31,6 +59,7 @@
     "babel-plugin-transform-export-extensions": "^6.8.0",
     "babel-plugin-transform-runtime": "^6.15.0",
     "babel-runtime": "^6.18.0",
+    "better-npm-run": "0.0.13",
     "express": "^4.14.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
@@ -39,6 +68,9 @@
     "react-router-redux": "^4.0.7",
     "redux": "^3.6.0",
     "redux-async-connect": "^1.0.0-rc4",
+    "redux-devtools-extension": "^1.0.0",
+    "redux-logger": "^2.7.4",
+    "redux-thunk": "^2.1.0",
     "serialize-javascript": "^1.3.0"
   }
 }

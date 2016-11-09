@@ -40,7 +40,7 @@ import PrettyError from 'pretty-error'
 
 const pe = new PrettyError();
 pe.start();
-const debug = require('debug')("Server")
+const debug = require('debug')("App:Server")
 
 
 //************************
@@ -57,8 +57,10 @@ import createRoutes from '../shared/routes'
 //****************************
 // Config and Intialize store
 //****************************
-import store from '../shared/store/configureStore'
+import reducers from '../shared/reducer'
+import configureStore from '../shared/store/configureStore'
 
+const store = configureStore()
 
 //****************
 // App Setting
@@ -66,8 +68,7 @@ import store from '../shared/store/configureStore'
 debug("Setting Application...")
 const app = new Express()
 
-//app.use(webpackDevMiddleware(webpackCompiler, { noInfo: true, publicPath: config.output.publicPath }))
-//app.use(webpackHotMiddleware(webpackCompiler))
+app.use('/build', Express.static('./build'))
 
 app.get('*', (req, res) => {
 
@@ -91,31 +92,7 @@ app.get('*', (req, res) => {
     // Send response HTML
     res.send(`<!doctype html>\n ${app}`)
 
-    /*
-    loadOnServer({ ...renderProps, store }).then(() => {
-      
-      const components = (
-        <Provider store={store} key="provider">
-          <ReduxAsyncConnect renderPros={renderProps} />
-        </Provider>
-      )
-      
-      // React Dom Server Side Rendering
-      const app = ReactDOM.renderToString(<HTML components={components} store={store}/>)
- 
-      // Response 200
-      res.status(200)
-      
-      // Send response HTML
-      res.send(`<!doctype html>\n ${app}`)
-    })
-   */
-  
   })
 })
 
-// app.get('/', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../views/index.html'));
-// });
-//
 app.listen(7777, () => debug('Server running on localhost:7777'))
