@@ -1,9 +1,5 @@
-// Webpack Development Enviornment
 var webpack = require('webpack')
 var path = require('path')
-
-const debug = require('debug')("Build:Webpack")
-debug('Webpack on development is started..')
 
 var host = 'localhost'
 var port = '7777'

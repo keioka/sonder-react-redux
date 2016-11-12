@@ -1,5 +1,12 @@
 {
   "presets": [ "es2015", "stage-0", "stage-1", "stage-3", "react" ],
-  "plugins": ["transform-runtime", "transform-decorators-legacy", "transform-export-extensions"]
- 
+  "plugins": [
+    ["transform-runtime", {
+      helpers: false,
+      polyfill: false,
+      regenerator: true
+    }], 
+    "transform-decorators-legacy", 
+    "transform-export-extensions"
+  ]
 }
