@@ -1,10 +1,12 @@
-var webpack = require('webpack')
-var path = require('path')
+var webpack = require('webpack');
+var path = require('path');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-var host = 'localhost'
-var port = '7777'
+var host = 'localhost';
+var port = '7777';
 
 module.exports = {
+  name: 'client:development',
   devtool: '#source-map',
   context: path.resolve(__dirname, '..'),
   entry: [
@@ -19,9 +21,17 @@ module.exports = {
     extensions: ['', '.js', '.jsx']
   },
   debug: true,
+  stats: {
+    colors: true,
+    modules: true,
+    reasons: true
+  },
+  progress: true,
+  keepalive: true,
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    new ExtractTextPlugin("style.css")
   ],
   module: {
     loaders: [
@@ -29,6 +39,10 @@ module.exports = {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.less$/, 
+        loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]')
       }
     ]
   }
