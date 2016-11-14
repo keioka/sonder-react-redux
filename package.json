@@ -5,16 +5,24 @@
   "main": "index.js",
   "scripts": {
     "test": "better-npm-run test",
-    "server": "better-npm-run server",
+    "app": "better-npm-run app",
+    "build:server": "better-npm-run server",
     "build:dev": "better-npm-run build:dev",
     "watch": "better-npm-run watch"
   },
   "betterScripts": {
-    "server": {
-      "command": "nodemon --watch server --exec babel-node -- ./server/index.js",
+    "app": {
+      "command": "npm run build:server && npm run build:dev && nodemon --watch server --exec babel-node -- ./build/server.bundle.js",
       "env": {
         "DEBUG": "App:*"
       }
+    },
+    "server": {
+      "command": "webpack ---display-error-details --verbose --colors --progress --config ./server/webpack/config.server.js", 
+      "env": {
+        "DEBUG": "Build:*"
+      }
+
     },
     "build:dev": {
       "command": "webpack --devtool --display-error-details --verbose --colors --progress --config ./client/webpack/config.dev.js",
@@ -55,9 +63,11 @@
     "babel-preset-stage-1": "^6.16.0",
     "babel-preset-stage-3": "^6.17.0",
     "chai": "^3.5.0",
+    "css-loader": "^0.25.0",
     "debug": "^2.3.0",
     "enzyme": "^2.5.1",
     "eslint": "^3.9.1",
+    "extract-text-webpack-plugin": "^1.0.1",
     "karma": "^1.3.0",
     "karma-chrome-launcher": "^2.0.0",
     "karma-cli": "^1.0.1",
@@ -68,6 +78,8 @@
     "karma-phantomjs-launcher": "^1.0.2",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^1.8.0",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
     "mocha": "^3.1.2",
     "nodemon": "^1.11.0",
     "phantomjs": "^2.1.7",
@@ -76,7 +88,8 @@
     "react-addons-test-utils": "^15.3.2",
     "redux-devtools": "^3.3.1",
     "redux-devtools-dock-monitor": "^1.1.1",
-    "redux-devtools-log-monitor": "^1.1.1"
+    "redux-devtools-log-monitor": "^1.1.1",
+    "style-loader": "^0.13.1"
   },
   "dependencies": {
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
