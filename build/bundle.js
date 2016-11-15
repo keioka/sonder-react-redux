@@ -15816,7 +15816,7 @@
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
-	module.exports = {"header":"header__header___3oG-S"};
+	module.exports = {"font":"header__font___1HjcN","header":"header__header___3oG-S"};
 
 /***/ },
 /* 149 */
