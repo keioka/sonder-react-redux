@@ -26,24 +26,28 @@ module.exports = {
     modules: true,
     reasons: true
   },
-  progress: true,
   keepalive: true,
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.NoErrorsPlugin(),
-    new ExtractTextPlugin("style.css")
+    new webpack.NoErrorsPlugin()
   ],
   module: {
     loaders: [
       {
         test: /\.(js|jsx)$/,
-        loader: 'babel-loader',
+        loaders: ['babel-loader?' + JSON.stringify({
+          presets: ["react", "stage-0", "es2015", "react-hmre"],
+          plugins: ['react-hot-loader/babel']
+        })],
         exclude: /node_modules/
       },
       {
         test: /\.less$/, 
-        loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!less')
+        loaders: ['style', 'css?modules&sourceMap', 'less?sourceMap' ]
       }
     ]
+  },
+  devServer: {
+    headers: { "Access-Control-Allow-Origin": "*" }
   }
 }

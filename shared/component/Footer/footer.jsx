@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styles from './header.less'
 
-class Header extends Component {
+class Footer extends Component {
   
   constructor(){
     super()
@@ -10,7 +10,7 @@ class Header extends Component {
 
   render(){
     return (
-      <header className={styles.header}>
+      <footer className={styles.header}>
         <div className={styles.header__logo}>
           <img src="" alt="logo" />
         </div>
@@ -20,9 +20,9 @@ class Header extends Component {
             <li></li>
           </ul>
         </nav>
-      </header>
+      </footer>
     )
   }
 }
 
-export default Header
+export default Footer
