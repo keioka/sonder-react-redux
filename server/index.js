@@ -20,8 +20,6 @@ import { createMemoryHistory, useQueries } from 'history'
 // Webpack
 //*************
 import webpack from 'webpack'
-import webpackDevMiddleware from 'webpack-dev-middleware'
-import webpackHotMiddleware from 'webpack-hot-middleware'
 //import webpackConfig from '../webpack.config'
 //const webpackCompiler = webpack(config)
 
@@ -62,10 +60,16 @@ import configureStore from '../shared/store/configureStore'
 
 const store = configureStore()
 
+
+
+
+
 //****************
 // App Setting
 //**************** 
+
 debug("Setting Application...")
+
 const app = new Express()
 
 app.use('/build', Express.static('./build'))
