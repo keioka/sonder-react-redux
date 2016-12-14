@@ -1,0 +1,75 @@
+@import (reference) "../../style/index";
+
+.inputTagCountry {
+}
+
+.inputTagCountry {
+  display: inline;
+}
+
+.tags {
+  
+}
+
+.tag {
+  background-color: @color--light-gray;
+  border: 2px dotted #C6D1D0;
+  padding: 13px 25px;
+  margin-right: 10px;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  text-transform: capitalize;
+  letter-spacing: 0.7px;
+}
+
+.tag:hover {
+  cursor: pointer;
+}
+
+.tagInput {
+  display: inline-block;
+}
+
+.tagInputField {}
+
+.selected {}
+
+.remove {
+  margin-left: 4px;
+}
+
+.suggestions {
+  position: absolute;
+}
+
+.suggestions ul {
+  list-style-type: none;
+  box-shadow: .05em .01em .5em rgba(0,0,0,.2);
+  background: white;
+  width: 200px;
+}
+
+.suggestions li {
+  border-bottom: 1px solid #ddd;
+  padding: 15px 15px;
+  margin: 0;
+  font-size: 12px;
+  text-decoration: none;
+  letter-spacing: 0.7px;
+}
+
+.suggestions li mark {
+  background: none;
+  font-weight: 400;
+}
+
+.suggestions ul li.active {
+  background: @color--primary;
+  cursor: pointer;
+}
+
+.suggestions ul li:hover {
+  background: @color--primary;
+  color: white;
+  cursor: pointer;
+}

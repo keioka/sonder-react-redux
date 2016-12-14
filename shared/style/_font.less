@@ -1,3 +1,197 @@
-.font {
-  font-size: 24px;
+@import url('https://fonts.googleapis.com/css?family=Comfortaa:300,400,700');
+
+@import url('https://fonts.googleapis.com/css?family=Cabin:400,500,600,700');
+
+@import url('https://fonts.googleapis.com/css?family=Hind:400,500,600,700');
+
+@font-face {
+  font-family: 'Comfortaa';
+  font-weight: 400;
+  font-style: normal;
+  src: url('http://fonts.gstatic.com/s/comfortaa/v7/qLBu5CQmSMt1H43OiWJ77fY6323mHUZFJMgTvxaG2iE.eot');
+  src: url('http://fonts.gstatic.com/s/comfortaa/v7/qLBu5CQmSMt1H43OiWJ77fY6323mHUZFJMgTvxaG2iE.eot?#iefix') format('embedded-opentype'),
+       local('Comfortaa'),
+       local('Comfortaa-regular'),
+       url('http://fonts.gstatic.com/s/comfortaa/v7/qLBu5CQmSMt1H43OiWJ77ZBw1xU1rKptJj_0jans920.woff2') format('woff2'),
+       url('http://fonts.gstatic.com/s/comfortaa/v7/qLBu5CQmSMt1H43OiWJ77bO3LdcAZYWl9Si6vvxL-qU.woff') format('woff'),
+       url('http://fonts.gstatic.com/s/comfortaa/v7/qLBu5CQmSMt1H43OiWJ77aCWcynf_cDxXwCLxiixG1c.ttf') format('truetype'),
+       url('http://fonts.gstatic.com/l/font?kit=qLBu5CQmSMt1H43OiWJ77Zbd9NUM7myrQQz30yPaGQ4&skey=45c59603efbe20e8&v=v7#Comfortaa') format('svg');
+}
+
+@font-face {
+  font-family: 'Comfortaa';
+  font-weight: 700;
+  font-style: normal;
+  src: url('http://fonts.gstatic.com/s/comfortaa/v7/fND5XPYKrF2tQDwwfWZJI3Z2MAKAc2x4R1uOSeegc5U.eot');
+  src: url('http://fonts.gstatic.com/s/comfortaa/v7/fND5XPYKrF2tQDwwfWZJI3Z2MAKAc2x4R1uOSeegc5U.eot?#iefix') format('embedded-opentype'),
+       local('Comfortaa Bold'),
+       local('Comfortaa-700'),
+       url('http://fonts.gstatic.com/s/comfortaa/v7/fND5XPYKrF2tQDwwfWZJIxampu5_7CjHW5spxoeN3Vs.woff2') format('woff2'),
+       url('http://fonts.gstatic.com/s/comfortaa/v7/fND5XPYKrF2tQDwwfWZJI6RDOzjiPcYnFooOUGCOsRk.woff') format('woff'),
+       url('http://fonts.gstatic.com/s/comfortaa/v7/fND5XPYKrF2tQDwwfWZJI4nF5uFdDttMLvmWuJdhhgs.ttf') format('truetype'),
+       url('http://fonts.gstatic.com/l/font?kit=fND5XPYKrF2tQDwwfWZJI1lIn5tFQcqMuf-jhyJP0ps&skey=ab289941219ecbc3&v=v7#Comfortaa') format('svg');
+}
+
+@font-face {
+  font-family: 'Comfortaa';
+  font-weight: 300;
+  font-style: normal;
+  src: url('http://fonts.gstatic.com/s/comfortaa/v7/r_tUZNl0G8xCoOmp_JkSCnZ2MAKAc2x4R1uOSeegc5U.eot');
+  src: url('http://fonts.gstatic.com/s/comfortaa/v7/r_tUZNl0G8xCoOmp_JkSCnZ2MAKAc2x4R1uOSeegc5U.eot?#iefix') format('embedded-opentype'),
+       local('Comfortaa Light'),
+       local('Comfortaa-300'),
+       url('http://fonts.gstatic.com/s/comfortaa/v7/r_tUZNl0G8xCoOmp_JkSChampu5_7CjHW5spxoeN3Vs.woff2') format('woff2'),
+       url('http://fonts.gstatic.com/s/comfortaa/v7/r_tUZNl0G8xCoOmp_JkSCqRDOzjiPcYnFooOUGCOsRk.woff') format('woff'),
+       url('http://fonts.gstatic.com/s/comfortaa/v7/r_tUZNl0G8xCoOmp_JkSConF5uFdDttMLvmWuJdhhgs.ttf') format('truetype'),
+       url('http://fonts.gstatic.com/l/font?kit=r_tUZNl0G8xCoOmp_JkSCllIn5tFQcqMuf-jhyJP0ps&skey=1d2f7639d4b7d7b0&v=v7#Comfortaa') format('svg');
+}
+
+
+.font-color--basic {
+  color: @color--black;
+}
+
+.font-color--gray {
+  color: @color--gray;
+}
+
+.font-color--heading {
+  color: @color--dark-gray;
+}
+
+.font-family--comfortaa {
+  font-family: 'Comfortaa', sans-serif;
+}
+
+.font-family--cabin {
+  font-family: 'Cabin', sans-serif;
+}
+
+.font-family--hind {
+  font-family: 'Hind', sans-serif;
+}
+
+.font--default {
+  .font-family--cabin();
+  .font-color--basic();
+}
+
+.font--h1 {
+  .font-family--cabin();
+  .font-color--heading();
+  font-weight: 500;
+  font-size: 3rem;
+}
+
+.font--h2 {
+  .font-family--cabin();
+  .font-color--heading();
+  font-weight: 500;
+  font-size: 2.4rem;
+}
+
+.font--h3 {
+  .font-family--cabin();
+  .font-color--gray(); 
+  font-weight: 400;
+  font-size: 1.3rem;
+}
+
+.font--h4 {
+  .font-family--cabin();
+  .font-color--heading();
+  font-weight: 400;
+  font-size: 1.2rem;
+}
+
+.font--h5 {
+  .font-family--cabin();
+  color: @color--black;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: capitalize;
+}
+
+.font--h6 {
+  .font-family--cabin();
+  .font-color--heading();
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+
+.font--logo {
+  .font-color--basic();
+  .font-family--comfortaa();
+  font-weight: 400;
+  font-size: 1.4rem;
+}
+
+.font--nav {
+  .font-color--basic();
+  .font-family--hind();
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.4px;
+}
+
+.font--card {
+  .font-color--basic();
+  .font-family--hind();
+  font-weight: 400;
+}
+
+.font--btn--lg {
+  .font-family--hind();
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.font--nav__hover {
+  color: aquamarine;
+}
+
+.font--form--input {
+  .font-family--hind();
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.font--form--label {
+ .font--h6();
+  margin-top: 20px;
+}
+
+.font--home__title {
+  .font-family--comfortaa(); 
+  font-size: 2rem;
+  font-weight: 300;
+  padding: 20px 0px;
+  margin-bottom: 20px;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.font--section__title {
+  .font--h3();
+  margin-bottom: 20px;
+}
+
+.font--notification {
+  .font-family--comfortaa(); 
+  font-weight: 300;
+}
+
+.font--card__name {
+  .font--h4();
+  font-weight: 600;
+}
+
+.font--card__city {
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: inherit;
 }

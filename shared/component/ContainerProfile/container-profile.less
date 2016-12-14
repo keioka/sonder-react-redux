@@ -1,0 +1,27 @@
+@import (reference) "../../style/index";
+
+.containerProfile {
+  .container();
+  display: flex;
+  flex-direction: row;
+}
+
+.containerProfile__content {
+  padding: 0px 50px;
+  flex: 5;
+}
+
+
+@media screen and (max-width: 767px) {
+  .containerProfile__content {
+    padding: 0px 0px;
+  }
+  
+  .containerProfile__nav {
+    display: none;  
+  }
+  
+  .containerProfile__nav ul li {
+    display: inline;
+  }
+}

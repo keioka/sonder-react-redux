@@ -1,0 +1,79 @@
+@import (reference) "../../style/index";
+
+.sectionProfile {
+  display: flex;
+  padding: 20px 20px 0px 20px;
+  align-items: center;
+}
+
+.sectionProfile__image {
+  position: relative;
+  top: -60px;
+  background-color: white;
+  border-radius: 50%;
+  border: 10px solid white;
+}
+
+.sectionProfile__name {
+  .font--h2();
+}
+
+.sectionProfile__city {
+  .font--h5();
+  margin-top: 10px;
+}
+
+.sectionProfile button {
+  height: 50px;
+  margin-left: 40px;
+}
+
+.section__content {
+  position: relative;
+  top: -40px;
+  margin-left: 40px;
+  display: flex;
+  flex-direction: column;
+  flex: 4;
+}
+
+.section__content ul {
+  margin-top: 10px;
+}
+
+.section__content ul li{
+  display: inline;
+}
+
+.section__subcontent {
+  flex: 2;
+}
+
+@media screen and (max-width: 767px) {
+  
+  .sectionProfile {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 20px 0px 20px;
+    align-items: center;
+  //  padding-top: 70px;
+   }
+  
+  .section__content {
+    position: static;
+    margin-left: 0px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .section__content ul {
+    margin-top: 10px;
+  }
+
+  .section__content ul li{
+    display: inline;
+  }
+
+}

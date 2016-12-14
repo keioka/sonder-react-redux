@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import styles from './header.less'
+
+import {
+  footer
+} from './footer.less'
 
 class Footer extends Component {
   
@@ -10,16 +12,8 @@ class Footer extends Component {
 
   render(){
     return (
-      <footer className={styles.header}>
-        <div className={styles.header__logo}>
-          <img src="" alt="logo" />
-        </div>
-        <nav className={styles.header__nav}>
-          <ul className={styles.header__nav__ul}>
-            <li>Login</li>
-            <li></li>
-          </ul>
-        </nav>
+      <footer className={footer}>
+        <p>sonder in San Francisco</p>
       </footer>
     )
   }

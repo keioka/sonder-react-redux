@@ -54,7 +54,7 @@ module.exports = function(config){
     },
     coverageReporter: {
       type: 'html', //produces a html document after code is run
-      dir: 'spec/coverage/' //path to created html doc
+      dir: 'test/coverage/' //path to created html doc
     }
   })
 }

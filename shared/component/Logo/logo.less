@@ -1,0 +1,36 @@
+@import (reference) "../../style/index";
+
+.logo {
+  .display--vertical--center();
+}
+
+.logo svg {
+  width: 40px;
+  height: 40px;
+}
+
+.logo h3 {
+  .font--logo();
+  text-transform: lowercase;
+  margin-left: 5px;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+@media screen and (max-width: 767px) {
+  .logo {
+    justify-content: center;
+  }
+  
+  .logo svg {
+    width: 20px;
+    hright: 20px;
+  } 
+  
+  .logo h3 {
+    font-size: 14px;
+  }
+}

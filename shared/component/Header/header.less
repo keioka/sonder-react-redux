@@ -1,15 +1,16 @@
  @import (reference) "../../style/index";
 
 .header {
-  .font();
-  width: 100%;
-  background-color: blue;
-  display: flex;
+  .layout--content--padding();
+  .display--vertical--center();
+  .layout--box-shadow();
+  position: fixed;
+  background-color: #FFF;
+  top: 0;
+  z-index: 4;
+  height: 75px;
 }
 
-
-.header__nav__ul li {
-  display: inline;
+.header__logo {
+  flex: 1 0 0;
 }
-
-

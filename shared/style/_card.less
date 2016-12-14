@@ -1,0 +1,36 @@
+.card {
+  .font--card();
+  .layout--box-shadow();
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 20px 30px;
+}
+
+@image--xs: 32px;
+@image--sm: 64px;
+@image--lg: 128px;
+@image--xl: 192px;
+
+.card__img--xl {
+  width: @image--xl;
+  height: @image--xl;
+  border-radius: @image--xl;
+}
+
+.card__img--lg {
+  width: @image--lg;
+  height: @image--lg;
+  border-radius: @image--lg;
+}
+
+.card__img--sm {
+  width: @image--sm;
+  height: @image--sm;
+  border-radius: @image--sm;
+}
+
+.card__img--xs {
+  width: @image--xs;
+  height: @image--xs;
+  border-radius: @image--xs;
+}

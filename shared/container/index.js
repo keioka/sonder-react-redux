@@ -1,5 +1,7 @@
-export App from './app'
-export Home from './home'
-export City from './city'
-export User from './user'
-
+export App from './App/app.jsx'
+export Home from './Home/home.jsx'
+export City from './City/City.jsx'
+export User from './User/user.jsx'
+export Post from './Post/Post.jsx'
+export Dashboard from './Dashboard/Dashboard.jsx'
+export StyleGuide from './StyleGuide/styleguide.jsx'

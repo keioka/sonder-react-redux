@@ -1,0 +1,20 @@
+@color--primary: #009FB7;
+@color--secondary: #FED766;
+@color--tertiary: red;
+@color--black: #757575;
+@color--dark-gray: #878787;
+@color--gray: #BDBDBD;
+@color--light-gray: #EEEEEE;
+@color--fb: #3b5998;
+
+.gradientGenerator(@start, @end){
+  background: @start; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(@start, @end); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(@start, @end); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(@start, @end); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(@start, @end); /* Standard syntax */
+}
+
+.heroLayerColor {
+  .gradientGenerator(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+}

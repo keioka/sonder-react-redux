@@ -2,9 +2,15 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { Router, Route, RouterContext, browserHistory } from 'react-router'
 import { Provider } from 'react-redux'
+
+
+
 import configureStore from '../shared/store/configureStore'
 import reducers from '../shared/reducer'
 import AppRouter from '../shared/routes'
+
+import { fetchAllUsersRequest } from '../shared/actions/users'
+import { fetchCurrentUserRequest } from '../shared/actions/auth'
 
 const debug = require('debug')("App:Client")
 debug('Store configure is started..')
@@ -16,6 +22,9 @@ if ( window.__REDUX_STORE__ ) {
 } else {
   store = configureStore()
 }
+
+store.dispatch(fetchCurrentUserRequest())
+store.dispatch(fetchAllUsersRequest())
 
 render(
   <Provider store={store}>

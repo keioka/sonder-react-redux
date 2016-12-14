@@ -1,3 +1,45 @@
-.btn {
-  color: red;
+.btn-reset {
+  background: none;
+  border: 0;
+  color: inherit;
+  /* cursor: default; */
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  outline: none;
+  padding: 0;
+  -webkit-appearance: button; /* for input */
+  -webkit-user-select: none; /* for button */
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.btn(@bg-color) {
+  .btn-reset();
+  .layout--box-shadow();
+  background-color: @bg-color;
+  border-radius: 4px;
+  text-transform: capitalize;
+}
+
+.btn--small {
+  .font--btn--lg();
+  padding: 10px 35px;
+}
+
+.btn--large {
+  .font--btn--lg();
+  padding: 15px 45px;
+}
+
+.btn--primary {
+  .btn(@color--primary);
+  color: white;
+}
+
+
+.btn--fb {
+  .btn(@color--fb);
+  .btn--small();
+  color: white;
 }

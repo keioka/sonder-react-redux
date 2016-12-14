@@ -1,0 +1,99 @@
+@import (reference) "../../style/index";
+
+.cardPostWide {
+  .card();
+  //align-items: center;
+  .flex();
+  float: left;
+  flex: 1 1 100%;
+  flex-direction: row;
+  height: auto;
+  width: 100%;
+  margin: 5px;
+  padding: 0px;
+  align-items: center;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.cardPostWide__content {
+  .flex();
+  padding: 30px;
+  color: #FFF;
+  box-sizing: border-box;
+  flex-direction: column;
+  flex-wrap: wrap;
+  flex: 1 1 40%;
+  min-height: 300px;
+}
+
+.cardPostWide__description {
+  .flex();
+
+  padding: 30px;
+  align-content: flex-start;
+  box-sizing: border-box;
+  flex-direction: column;
+  flex-wrap: wrap;
+  flex: 1 1 60%;
+}
+
+.cardPostWide__description__header {
+  .flex();
+  flex-direction: row;
+}
+
+.cardPostWide__description__header__profile {
+  margin-left: 15px;  
+}
+
+.profile__name {
+  .font--h4();  
+}
+
+.profile__location {
+  .font--h5();  
+}
+
+@line-height: 1.2rem;
+@font-size: 0.8rem;
+@line-to-show: 5;
+
+.cardPostWide__description__body {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  font-size: @font-size;
+  line-height: @line-height;
+  height: @line-height * @font-size * @line-to-show;
+  overflow: hidden;
+  text-overflow: ellipsis;
+} 
+
+.cardPostWide__requests {
+  flex: 2 1 100%;
+  opacity: 0;
+  height: 0;
+}
+
+.cardPostWide__requests ul li {
+  border-top: 2px solid @color--light-gray; 
+  list-style: none;
+}
+
+.statusTag {
+  background-color: white;
+  color: @color--black;
+  font-size: 0.8rem;
+  font-weight: 600;
+  width: 40px;
+  text-align: center;
+  border-radius: 4px;
+  display: inline-block;
+  padding: 2px 5px;
+  margin-bottom: 15px;
+}
+
+.cardPostWideActive { background-color: @color--secondary; }
+.cardPostWideMatched {  background-color: @color--primary;}
+.cardPostWideEnd { background-color: @color--light-gray; }

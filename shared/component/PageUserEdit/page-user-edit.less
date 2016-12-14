@@ -1,0 +1,107 @@
+@import (reference) "../../style/index";
+
+@padding: 40px 40px;
+
+.pageUserEdit {
+  margin: 40px 0px;
+  padding: @padding;
+  border-radius: 4px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.pageUserEdit__body {
+  padding: @padding;
+  display: flex;
+}
+
+.pageUserEdit__form {
+  flex: 2;
+  padding: 0px 20px;
+}
+
+.pageUserEdit__notification {
+  .font--notification();
+  background-color: @color--secondary;
+  border-radius: 4px;
+  font-size: 1.4rem;
+}
+
+.pageUserEdit__notification__message {
+  .flex();
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 20px;
+}
+
+/*******
+Nav
+*/
+.nav {
+  flex: 1;
+}
+
+.nav ul {
+  position: fixed;
+  width: 20%;
+}
+
+.nav ul {
+  border: 1px solid @color--light-gray;
+  border-radius: 4px;
+  box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.1)
+}
+
+.nav li {
+  border-bottom: 1px solid @color--light-gray;
+  height: 50px;
+  background-color: white;
+  font-size: 0.8rem;
+  list-style: none;
+}
+
+.nav li:hover {
+  cursor: pointer;
+}
+
+.nav li:before{
+  content: " ";
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+  width: 5px;
+  cursor: pointer;
+}
+
+.nav a {
+  color: inherit;
+}
+
+.nav li:hover:before{
+  background-color: @color--secondary;
+  cursor: pointer;
+}
+
+.nav li span {
+  padding: 20px 20px;
+}
+
+.navProfile__title {
+  .font--h6();
+}
+
+.pageUserEdit__notification svg {
+  width: 128px;
+  height: 128px;
+}
+
+.pageUserEdit__notification svg path {
+  @scale: 0.2;
+  transform: scale(@scale); 
+  -webkit-transform: scale(@scale); 
+  -moz-transform: scale(@scale); 
+  -ms-transform: scale(@scale); 
+  -o-transform: scale(@scale);
+}
+

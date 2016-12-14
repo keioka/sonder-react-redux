@@ -1,0 +1,22 @@
+.flex {
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+.display--vertical--center {
+  .flex();
+  align-items: center;
+}
+
+.display--modal {
+  background-color: white;
+  position: absolute;
+  width: 100%;
+  height: auto;
+  min-height: 100vh;
+  top: 0px;
+  left: 0px;
+}

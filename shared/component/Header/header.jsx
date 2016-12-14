@@ -1,6 +1,30 @@
+//************************
+// Modules
+//************************
+
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import styles from './header.less'
+
+//************************
+// Component
+//************************
+
+import HeaderNav from '../HeaderNav/HeaderNav'
+
+//************************
+// Style
+//************************
+
+import {
+  header,
+  header__logo
+} from './header.less'
+
+//*************************
+// Assets
+//*************************
+
+import Logo from '../Logo/logo'
+
 
 class Header extends Component {
   
@@ -10,16 +34,11 @@ class Header extends Component {
 
   render(){
     return (
-      <header className={styles.header}>
-        <div className={styles.header__logo}>
-          <img src="" alt="logo" />
+      <header className={header}>
+        <div className={header__logo}>
+          <Logo />  
         </div>
-        <nav className={styles.header__nav}>
-          <ul className={styles.header__nav__ul}>
-            <li>Login</li>
-            <li></li>
-          </ul>
-        </nav>
+        <HeaderNav {...this.props} />
       </header>
     )
   }
