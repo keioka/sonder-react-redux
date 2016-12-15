@@ -8,7 +8,8 @@
     "app": "better-npm-run app",
     "build:server": "better-npm-run server",
     "build:dev": "better-npm-run build:dev",
-    "watch": "better-npm-run watch"
+    "watch": "better-npm-run watch",
+    "flow": "flow; test $? -eq 0 -o $? -eq 2"
   },
   "betterScripts": {
     "app": {
