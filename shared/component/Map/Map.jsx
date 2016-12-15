@@ -17,14 +17,14 @@ import GoogleMap from 'google-map-react';
 
 import {
   map
-} 
+}
 from './map.less'
 
 //*************************
 // Assets
 //*************************
 class Map extends Component {
-  
+
   static defaultProps = {
     center: {lat: 59.938043, lng: 30.337157},
     zoom: 9,

@@ -20,7 +20,7 @@ import {
 //*************************
 // Assets
 //*************************
-import Logo from '../../assets/images/svg/logo.svg'
+import Logo from './logo.svg'
 
 export default ()=>{
   return (

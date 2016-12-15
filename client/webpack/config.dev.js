@@ -48,12 +48,12 @@ module.exports = {
         loaders: ['babel-loader?' + JSON.stringify({
           presets: ["react", "es2015", "stage-0", "react-hmre"],
           plugins: [
-            'react-hot-loader/babel', 
+            'react-hot-loader/babel',
             ["transform-runtime", {
               helpers: false,
               polyfill: false,
               regenerator: true
-            }], 
+            }],
             "transform-decorators-legacy",
             "transform-class-properties",
             "transform-export-extensions"
@@ -62,7 +62,7 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.less$/, 
+        test: /\.less$/,
         loaders: ['style', 'css?modules&sourceMap', 'less?sourceMap' ]
       },
       {

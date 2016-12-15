@@ -7,7 +7,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_ERROR,
   LOGOUT_REQUEST,
-  LOGOUT_SUCCESS, 
+  LOGOUT_SUCCESS,
   LOGOUT_ERROR,
   SYNC_FB_AUTH_SUCCESS,
   LOGOUT_FB_AUTH_SUCCESS,
@@ -18,118 +18,111 @@ import {
 const initialState = {
   isLogined: false,
   isNewUser: true,
-  sessionToken: "",
+  sessionToken: '',
   profileForm: {
-    first_name: "",
-    last_name: "",
-    birthday: "",
+    first_name: '',
+    last_name: '',
+    birthday: '',
     languages: [],
     images: [],
     interests: [],
     introduction: [{}, {}],
     lcoation: {
-      city: "San Francisco",
-      province: "California",
-      country: "USA",
+      city: 'San Francisco',
+      province: 'California',
+      country: 'USA',
       latitude: undefined,
-      longitude: undefined
-    }
+      longitude: undefined,
+    },
   },
   message: {
-    userId : [{
-      timestamp: "",
-      message: "",
-      userId: ""
+    userId: [{
+      timestamp: '',
+      message: '',
+      userId: '',
     }, {
-      
+
     }],
-    userId : [{}, {}]
   },
   currentUser: {
     id: 0,
     profile: {
-      first_name: "",
-      last_name: "",
-      birthday: "",
+      first_name: '',
+      last_name: '',
+      birthday: '',
       languages: [],
       images: [],
-      interests: []
+      interests: [],
     },
     location: {
-      city: "San Francisco",
-      province: "California",
-      country: "USA",
+      city: 'San Francisco',
+      province: 'California',
+      country: 'USA',
       latitude: undefined,
-      longitude: undefined
+      longitude: undefined,
     },
     introduction: {
-      question1: ""
+      question1: '',
     },
     posts: [{
       id: 1,
-      uid: "",
-      date: "26th August, 2016",
-      description: "Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei",
-      user: {id: 1},
+      uid: '',
+      date: '26th August, 2016',
+      description: 'Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei',
+      user: { id: 1 },
       location: {},
       isEnd: false,
       isMatched: false,
       mathcedUser: {},
-      requestUser: []
+      requestUser: [],
     }],
     friends: [],
     friendRequestedUsers: [],
-    sentRequestUsers: []
-  }
+    sentRequestUsers: [],
+  },
 }
 
-export default function(state = initialState, action) {
-  switch(action.type){
-      
+export default function (state = initialState, action) {
+  switch (action.type) {
     case FETCH_CURRENT_USER_SUCCESS:
-  
-      const session = camelize(action.session)
+      const session: object = camelize(action.session)
       cookie.save('__sonder_t__', action.session.session_token)
+      
       return Object.assign({}, state, {
         currentUser: Object.assign({},
           ...state.currentUser,
-          ...session.currentUser
+          ...session.currentUser,
         ),
         ...session,
-        isLogined: true
+        isLogined: true,
       })
-      
+
     case LOGOUT_SUCCESS:
-      
       cookie.remove('__sonder_t__', { path: '/' })
       browserHistory.push('/')
-      
+
       return Object.assign({}, state, {
-        sessionToken: "",
+        sessionToken: '',
         isNewUser: false,
         currentUser: {},
-        isLogined: false
+        isLogined: false,
       })
-      
+
     case LOGOUT_ERROR:
       return state
-    
+
     case SYNC_FB_AUTH_SUCCESS:
-      
       const response = camelize(action.response)
-      const { previousProfile } = state.currentUser
-   
       cookie.save('__sonder_t__', action.response.session_token)
-      
-      
+
       return Object.assign({}, state, {
         currentUser: {
           ...state.currentUser,
-          ...response.currentUser
+          ...response.currentUser,
         },
-        isLogined: true
+        isLogined: true,
       })
-    
+
     default:
       return state
   }

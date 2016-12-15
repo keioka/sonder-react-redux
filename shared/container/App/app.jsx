@@ -2,32 +2,33 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { 
+import {
   Header,
   Footer,
-  Hero
-} from '../../component' 
+  Hero,
+} from '../../component'
 
-//**********
-// Style
-//**********
+//  **********
+//  Style
+//  **********
+
 import {
-  app
+  app,
 } from './app.less'
 
-//**********
-// Style
-//**********
+//  **********
+//  Actions
+//  **********
 
 
 import * as AuthActions from '../../actions/auth'
 
 const mapStateToProps = state => {
   const { currentUser, isLogined } = state.auth
-  
+
   return {
-    currentUser, 
-    isLogined
+    currentUser,
+    isLogined,
   }
 }
 
@@ -37,16 +38,16 @@ const mapDispatchToProps = dispatch => {
 
 @connect(mapStateToProps, mapDispatchToProps)
 class App extends Component {
-  
-  constructor(){
-    super()
+
+  static propsType = {
+    children: React.PropTypes.node,
   }
-  
-  render(){
+
+  render() {
     return (
       <div>
         <Header {...this.props} />
-        { this.props.location.pathname === "/" ? <Hero /> : null }
+        { this.props.location.pathname === '/' ? <Hero /> : null }
         <main className={app}>
           {this.props.children}
         </main>

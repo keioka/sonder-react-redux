@@ -5,9 +5,10 @@
       helpers: false,
       polyfill: false,
       regenerator: true
-    }], 
+    }],
     "transform-decorators-legacy",
     "transform-class-properties",
-    "transform-export-extensions"
+    "transform-export-extensions",
+    "transform-flow-strip-types"
   ]
 }

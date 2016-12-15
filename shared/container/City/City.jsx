@@ -4,11 +4,9 @@ import { bindActionCreators } from 'redux'
 
 import * as CityActions from '../../actions/city'
 
-const mapStateToProps = state => {
-  return {
-    users: state.users
-  }
-}
+const mapStateToProps = state => ({
+  users: state.users,
+})
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators(CityActions, dispatch)
@@ -16,19 +14,13 @@ const mapDispatchToProps = dispatch => (
 
 @connect(mapStateToProps, mapDispatchToProps)
 class City extends Component {
-  
-  constructor(){
-    super()
-  }
 
-  render(){
+  render() {
     const { users } = this.props
-    const children = React.Children.map(this.props.children, child => {
-      return React.cloneElement(child, {
-         ...users
-      })
-    })
-    
+    const children = React.Children.map(this.props.children, child => React.cloneElement(child, {
+      ...users,
+    }))
+
     return (
       <div>
         {children}

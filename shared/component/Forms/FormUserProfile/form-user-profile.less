@@ -1,0 +1,95 @@
+@import (reference) "../../../style/index";
+
+.form {}
+
+.form input[type="text"], .form input[type="number"] {
+  .input--reset();
+  .font--form--input();
+  background-color: #E9E8EA;
+  border-radius: 4px;
+  padding: 25px 20px;
+  margin: 5px 0px;
+  text-transform: capitalize;
+}
+
+.form input[type="date"] {
+  .input--reset();
+  .font--form--input();
+  background-color: #E9E8EA;
+  border-radius: 4px;
+  padding: 25px 20px;
+  margin: 5px 0px;
+  text-transform: uppercase;
+}
+
+
+.form input[type="date"]:invalid {
+  border: 1px solid red;
+}
+
+
+.form input[type="radio"] {
+  .font--form--input();
+  border-radius: 4px;
+  margin-right: 15px; 
+}
+
+.form input[type="radio"] + span  {
+  margin-right: 15px; 
+}
+
+.form input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.form input[type="number"]::-webkit-outer-spin-button,
+.form input[type="number"]::-webkit-inner-spin-button,
+{
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+
+.form label {
+  display: block;
+}
+
+.form__title:after {
+  content: "";
+}
+
+.form__section {
+  display: block;
+}
+
+.form__section__title {
+  .font--h3();
+}
+
+.form__section__block {
+  margin-right: 10px;
+  display: inline-block;  
+}
+
+.form input:focus {
+  background-color: beige;
+}
+
+.form label {
+  .font--form--label();
+}
+
+input:required:before{
+  content: "*";
+  color: red;
+}
+
+input:valid:before{
+  content: "";
+  color: green;
+}
+
+input:invalid:before{
+  color: red;
+}

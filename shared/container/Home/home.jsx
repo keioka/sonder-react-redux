@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 import {
   Hero,
   Map,
-  ContainerCards
+  ContainerCards,
 } from '../../component'
 
 
@@ -14,14 +14,13 @@ import {
   container__title,
 } from './home.less'
 
-  
+
 import * as UsersActions from '../../actions/users'
 
 const mapStateToProps = state => {
   const { allUsers } = state.users
-  
   return {
-    allUsers
+    allUsers,
   }
 }
 
@@ -31,11 +30,6 @@ const mapDispatchToProps = dispatch => {
 
 @connect(mapStateToProps, mapDispatchToProps)
 class Home extends Component {
-  
-  constructor(){
-    super()
-  }
-  
 
   render(){
     return (

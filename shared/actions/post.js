@@ -37,7 +37,6 @@ export const createNewPostRequest = (params) => {
       params: {"post": paramsMergedUserId}
     })
     .then((response)=>{
-      console.log(response)
       if (response.ok) {
         return response.json()
       }
@@ -98,7 +97,7 @@ const acceptHangoutRequest = (postId, userId) => {
     fecth(url.acceptHangout)
     .then()
     .then()
-    .cathc()
+    .catch()
   }
 }                                        
 
