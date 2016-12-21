@@ -1,49 +1,51 @@
-//************************
+// ************************
 // Modules
-//************************
+// ************************
 
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 
-//************************
+// ************************
 // Component
-//************************
+// ************************
 
 import {
   ContainerProfile,
-  ContainerProfileHeader
+  ContainerProfileHeader,
 } from '../../'
 
-//************************
+// ************************
 // Style
-//************************
+// ************************
 
-//*************************
+// *************************
 // Assets
-//*************************
+// *************************
 
 
 class PageDashboardShow extends Component {
-  
-  constructor(){
-    super()
+
+  static propTypes = {
+    isLogined: PropTypes.bool.isRequired,
+    currentUser: PropTypes.object.isRequired,
+    acceptHangoutRequest: PropTypes.func.isRequired,
   }
 
-  render(){
-    
-    const { currentUser } = this.props
+  render() {
+    const { currentUser, isLogined, acceptHangoutRequest } = this.props
 
     return (
       <div>
-        <ContainerProfileHeader 
-          user={currentUser} 
-          isDashboard={true} 
-          isLogined={this.props.isLogined}
+        <ContainerProfileHeader
+          user={currentUser}
+          isDashboard={true}
+          isLogined={isLogined}
         />
-        <ContainerProfile 
-          user={currentUser} 
+        <ContainerProfile
+          user={currentUser}
           posts={currentUser.posts}
-          isDashboard={true} 
-          isLogined={this.props.isLogined}
+          isDashboard={true}
+          isLogined={isLogined}
+          acceptHangoutRequest={acceptHangoutRequest}
         />
       </div>
     )

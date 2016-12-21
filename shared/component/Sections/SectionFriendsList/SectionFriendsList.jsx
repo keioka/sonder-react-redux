@@ -1,48 +1,42 @@
-//************************
-// Modules
-//************************
+//  ************************
+//  Modules
+//  ************************
 
 import React, { Component } from 'react'
 
-//************************
-// Component
-//************************
+//  ************************
+//  Component
+//  ************************
 
 import {
-  CardProfileWide
+  CardProfileWide,
 } from '../../'
 
 
-//************************
-// Style
-//************************
+//  ************************
+//  Style
+//  ************************
 
 import {
   sectionFriendsList,
-  sectionFriendsList__title
+  sectionFriendsList__title,
 } from './section-friends-list.less'
 
-//*************************
-// Assets
-//*************************
+//  *************************
+//  Assets
+//  *************************
 
 class SectionFriendsList extends Component {
-  
-  constructor(){
-    super()
-  }
 
-  render(){
-    
+  render() {
     const { friends } = this.props
     const { isFriendRequest } = this.props
-    const title = isFriendRequest ? "Friend Requests" : "Friends List"
-    
-    
-    const cards = friends.map((user)=>{  
-      return <CardProfileWide key={user.id} user={user} />
+    const title = isFriendRequest ? 'Friend Requests' : 'Friends List'
+
+    const cards = friends.map((user) => {
+      return <CardProfileWide user={user} />
     })
-    
+
     return (
       <div className={sectionFriendsList}>
         <h3 className={sectionFriendsList__title}>{title}</h3>

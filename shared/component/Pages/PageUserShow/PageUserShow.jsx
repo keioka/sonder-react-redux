@@ -1,41 +1,43 @@
-//************************
-// Modules
-//************************
+//  ************************
+//  Modules
+//  ************************
 
 import React, { Component } from 'react'
 
-//************************
-// Component
-//************************
+//  ************************
+//  Component
+//  ************************
 
 import {
   ContainerProfile,
-  ContainerProfileHeader
+  ContainerProfileHeader,
 } from '../../'
 
-//************************
-// Style
-//************************
+//  ************************
+//  Style
+//  ************************
 
-//*************************
-// Assets
-//*************************
+//  *************************
+//  Assets
+//  *************************
 
 
 class PageUserShow extends Component {
-  
-  constructor(){
-    super()
+
+  static propTypes = {
+    user: React.PropTypes.object,
   }
 
-  render(){
-    
+  render() {
     return (
       <div>
         { this.props.user &&
           <div>
-            <ContainerProfileHeader {...this.props} isDashboard={false} />
-            <ContainerProfile user={this.props.user}/>
+            <ContainerProfileHeader
+              {...this.props}
+              isDashboard={false}
+            />
+            <ContainerProfile user={this.props.user} />
           </div>
         }
       </div>

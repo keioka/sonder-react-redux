@@ -1,4 +1,4 @@
-import fetch from 'whatwg-fetch'
+import 'whatwg-fetch'
 import cookie from 'react-cookie'
 
 import {

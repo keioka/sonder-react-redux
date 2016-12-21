@@ -58,8 +58,8 @@ const initialState = {
       city: 'San Francisco',
       province: 'California',
       country: 'USA',
-      latitude: undefined,
-      longitude: undefined,
+      latitude: 121.322442,
+      longitude: 123.43223,
     },
     introduction: {
       question1: '',
@@ -87,7 +87,7 @@ export default function (state = initialState, action) {
     case FETCH_CURRENT_USER_SUCCESS:
       const session: object = camelize(action.session)
       cookie.save('__sonder_t__', action.session.session_token)
-      
+
       return Object.assign({}, state, {
         currentUser: Object.assign({},
           ...state.currentUser,

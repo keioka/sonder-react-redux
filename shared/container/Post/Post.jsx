@@ -10,29 +10,24 @@ const mapStateToProps = state => ({
   post: state.post
 })
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({
-    ...PostActions, 
-  }, dispatch)
-}
+const mapDispatchToProps = dispatch => bindActionCreators({
+  ...PostActions,
+}, dispatch)
 
 @connect(mapStateToProps, mapDispatchToProps)
 class Post extends Component {
-  
-  constructor(){
-    super()
-  }
 
-  render(){
-    const { post, auth, createNewPostRequest } = this.props
-   
-    const children = React.Children.map(this.props.children, child => {
-      return React.cloneElement(child, {
-        ...auth,
-        ...post,
-        createNewPostRequest
-      })
-    })
+  render() {
+    const { post, auth, createNewPostRequest, fetchPostRequest, requestHangoutRequest, acceptHangoutRequest } = this.props
+
+    const children = React.Children.map(this.props.children, child => React.cloneElement(child, {
+      ...auth,
+      ...post,
+      createNewPostRequest,
+      fetchPostRequest,
+      requestHangoutRequest,
+      acceptHangoutRequest,
+    }))
     return (
       <div>
         {children}

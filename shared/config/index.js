@@ -17,8 +17,8 @@ endpoint.auth = {
 }
 
 endpoint.post = {
-  requestHangout: (userId) => (`${API_BASE_URL}/posts`),
-  createNewPost: (userId, frinedId) => (`${API_BASE_URL}/users/${userId}/friends/${frinedId}/request`),
-  acceptHangout: (userId) => (   `${API_BASE_URL}/users/${userId}/friends/${frinedId}/approve`)
+  fetchPost: postId => (`${API_BASE_URL}/posts/${postId}`),
+  createNewPost: () => (`${API_BASE_URL}/posts`),
+  requestHangout: ({ postId, currentUserId }) => (`${API_BASE_URL}/posts/${postId}/users/${currentUserId}/request`),
+  acceptHangout: (postId, userId) => (`${API_BASE_URL}/posts/${postId}/users/${userId}/approve`)
 }
-

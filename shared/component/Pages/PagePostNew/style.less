@@ -1,0 +1,72 @@
+@import (reference) "../../../style/index";
+
+.pagePostNew {
+  min-height: 100vh;
+}
+
+.pagePostNew__title {
+  .font--h2();
+  text-align: center;
+  padding: 40px 0px;
+}
+
+.pagePostNew__subtitle {
+  .font--h5();
+  text-align: center;
+  padding: 60px 0px;
+}
+
+.form {}
+
+.form input, .form textarea {
+  .input--reset();
+  .font--form--input();
+  display: block;
+  background-color: #E9E8EA;
+  border-radius: 4px;
+  padding: 25px 20px;
+  margin: 5px 0px;
+}
+
+.form select {
+  outline: none;
+  border: none;
+  width: 80px;
+  .font--form--input();
+  display: block;
+  background-color: #E9E8EA;
+  border-radius: 4px;
+  padding: 25px 20px;
+  margin: 5px 5px;
+}
+
+.section {
+  .flex();
+  justify-content: center;
+}
+
+.section textarea {
+  width: 360px;
+  height: 240px;
+}
+
+.panleControl {
+  .flex();
+  margin-top: 40px;
+  padding: 30px;
+  justify-content: center;
+}
+
+.panleControl button {
+  margin: 0px 15px;
+}
+
+.timePicker {
+  height: 20px;
+}
+
+.alert {
+  text-align: center;
+  flex: 1 1 100%;
+  padding: 20px;
+}

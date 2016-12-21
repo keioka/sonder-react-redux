@@ -1,33 +1,41 @@
 import React, { Component } from 'react'
 
-import { 
+import {
   ContainerCityBody,
-  ContainerCity,
+  ContainerCityHeader,
   ContainerCards,
-  NavCity
+  SectionPostsLists,
+  NavCity,
 } from '../../'
 
 class PageCityShow extends Component {
-  
-  static propstype = {}
-  
-  constructor(){
+
+  constructor() {
     super()
+    this.state = {
+      activeTab: 0,
+    }
+    this.onChangeActiveTab = this.onChangeActiveTab.bind(this)
   }
 
-  render(){
-    
-    const { locationId } = this.props.params
-    
-    const users = this.props.allUsers.filter((user)=>{
-      return user.location.id == locationId
+  onChangeActiveTab(value) {
+    this.setState({
+      activeTab: value,
     })
-    
+  }
+
+  render() {
+    const { locationId } = this.props.params
+    const users = this.props.allUsers.filter(user => user.location.id === parseInt(locationId))
+    const posts=[]
     return (
       <div>
-        <ContainerCity />
-        <NavCity />
-        <ContainerCards users={users}/>
+        <ContainerCityHeader />
+        <NavCity onChangeActiveTab={this.onChangeActiveTab} />
+        { this.state.activeTab === 0 ?
+          <ContainerCards users={users} /> :
+          <SectionPostsLists posts={posts} />
+        }
       </div>
     )
   }

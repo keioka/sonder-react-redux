@@ -11,11 +11,7 @@ class BtnPrimary extends Component {
     btnText: React.PropTypes.string.isRequired
   }
 
-  constructor(){
-    super()
-  }
-
-  render(){
+  render() {
     return (
       <button className={btnPrimary} onClick={this.props.onClick}>
         {this.props.btnText}

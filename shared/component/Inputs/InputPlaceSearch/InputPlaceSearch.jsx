@@ -6,33 +6,30 @@ import {
   geosuggest,
   geosuggest__suggests,
   geosuggest__input,
-  geosuggest__suggestsHidden
+  hidden,
 } from './input-place-search.less'
 
 
 class InputPlaceSearch extends Component {
- 
+
   constructor(props) {
     super(props)
     this.state = { address: 'San Francisco, CA' }
   }
 
   render() {
-
     const style = {
-      "input": {width: "100%"},
-      "suggestItem": {}
+      'input': { width: '100%' },
     }
 
-    
-    document.getElementsByClassName('geosuggest__suggests--hidden').className = geosuggest__suggestsHidden
-    
-    const types = ["(cities)"]
-    
+    const types = ['(cities)']
+
     return (
-      <Geosuggest 
+      <Geosuggest
         className={geosuggest}
+        suggestsHiddenClassName={hidden}
         style={style}
+        initialValue={this.props.initialValue}
         autoActivateFirstSuggest={true}
         placeholder={"Type city name and select one"}
         types={types}

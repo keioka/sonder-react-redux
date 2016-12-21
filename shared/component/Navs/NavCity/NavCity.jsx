@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 
 
 import {
@@ -6,20 +6,27 @@ import {
 } from './nav-city.less'
 
 class ContainerCityBody extends Component {
-  
-  static propstype = {}
-  
+
+  static propTypes = {
+    onChangeActiveTab: PropTypes.func.isRequired,
+  }
+
   constructor(){
     super()
+    this.onClickActiveTabHandler = this.onClickActiveTabHandler.bind(this)
+  }
+
+  onClickActiveTabHandler(value) {
+    this.props.onChangeActiveTab(value)
   }
 
   render(){
-    
+
     return (
       <nav className={navCity}>
         <ul>
-          <li>Find Locals</li>
-          <li>Find Travelers</li>
+          <li onClick={this.onClickActiveTabHandler.bind(this, 0)}>Find Locals</li>
+          <li onClick={this.onClickActiveTabHandler.bind(this, 1)}>Find Travelers</li>
         </ul>
       </nav>
     )

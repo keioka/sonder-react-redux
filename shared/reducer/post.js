@@ -1,42 +1,42 @@
 import {
   CREATE_NEW_POST_SUCCESS,
-  LOGOUT_SUCCESS,
-  LOGOUT_ERROR,
-  SYNC_FB_AUTH_SUCCESS
+  SYNC_FB_AUTH_SUCCESS,
+  FETCH_POST_SUCCESS,
 } from '../constant/post'
 
 const initialState = {
   posts: [{
     id: 1,
-    uid: "",
-    date: "",
-    description: "Hi, I am Kei",
+    uid: '',
+    date: '',
+    description: 'Hi, I am Kei',
     user: {},
     location: {},
     isEnd: false,
     isMatched: false,
     mathcedUser: {},
-    requestUser: []
+    requestUser: [],
   }],
-  postForm : {
-    date: "",
-    description: "",
-    location: {}
-  }
+  postForm: {
+    date: '',
+    description: '',
+    location: {},
+  },
 }
 
-export default function(state = initialState, action) {
-  switch(action.type){
-      
+export default function (state = initialState, action) {
+  switch (action.type) {
+
+    case FETCH_POST_SUCCESS:
+      return Object.assign({}, state, {
+        posts: [...state.posts, action.post]
+      })
     case CREATE_NEW_POST_SUCCESS:
-      
-    case LOGOUT_SUCCESS:
-        
-    case LOGOUT_ERROR:
-    
-    
+      return Object.assign({}, state, {
+        posts: [...state.posts, action.post]
+      })
     case SYNC_FB_AUTH_SUCCESS:
-    
+
     default:
       return state
   }

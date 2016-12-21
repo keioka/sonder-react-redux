@@ -1,52 +1,55 @@
-//************************
+// ************************
 // Modules
-//************************
+// ************************
 
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 
-//************************
+// ************************
 // Component
-//************************
+// ************************
 
 import {
-  CardPostWide
+  CardPostWide,
+  CardMyPostWide
 } from '../../'
 
 
-//************************
+// ************************
 // Style
-//************************
+// ************************
 
 import {
   sectionFriendsList,
-  sectionFriendsList__title
-} from './section-posts-list.less'
+  sectionFriendsList__title,
+} from './style.less'
 
-//*************************
+// *************************
 // Assets
-//*************************
-
+// *************************
 
 
 class SectionPostsList extends Component {
-  
-  static defaultProps = {
-    posts: []
-  }
-  
-  constructor(){
-    super()
-  }
-  
-  
 
-  render(){
-    
-    const { posts } = this.props 
-    const cards = posts.map((post)=>{  
-      return <CardPostWide key={post.id} post={post} />
-    })
-    
+  static propTypes = {
+    posts: PropTypes.array.isRequired,
+    isByCurrentUser: PropTypes.bool.isRequired,
+    acceptHangoutRequest: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    posts: [],
+  }
+
+  render() {
+    const { posts, isByCurrentUser, acceptHangoutRequest } = this.props
+
+    let cards = []
+    if (posts.length > 0 && isByCurrentUser) {
+      cards = posts.map(post => <CardMyPostWide key={post.id} post={post} acceptHangoutRequest={acceptHangoutRequest} />)
+    } else if (posts.length > 0 && !isByCurrentUser) {
+      cards = posts.map(post => <CardPostWide key={post.id} post={post} />)
+    }
+
     return (
       <div className={sectionFriendsList}>
         <h3 className={sectionFriendsList__title}>Posts</h3>

@@ -8,25 +8,18 @@ import {
   ContainerCards,
 } from '../../component'
 
-
 import {
   container,
   container__title,
 } from './home.less'
 
+import * as UserActions from '../../actions/user'
 
-import * as UsersActions from '../../actions/users'
+const mapStateToProps = state => ({
+  allUsers: state.users.allUsers,
+})
 
-const mapStateToProps = state => {
-  const { allUsers } = state.users
-  return {
-    allUsers,
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(UsersActions, dispatch)
-}
+const mapDispatchToProps = dispatch => bindActionCreators(UserActions, dispatch)
 
 @connect(mapStateToProps, mapDispatchToProps)
 class Home extends Component {

@@ -17,10 +17,10 @@ class NavProfile extends Component {
         <ul>
           <li><span>Profile</span></li>
           <li><span>Posts</span></li>
-          <li><span>Friends List</span></li>
+          {/* <li><span>Friends List</span></li>
           { this.props.isDashboard &&
             <li><span>Friends Request</span></li>
-          }
+          } */}
         </ul>
       </nav>
     )

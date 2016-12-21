@@ -26,68 +26,69 @@ const userIsAlreadySentRequest = (users, currentUserShowId) => {
 }
 
 class SectionProfile extends Component {
-  
+
   static propstype = {}
-  
-  constructor(){
+
+  constructor() {
     super()
     this.sendRequest = this.sendRequest.bind(this)
   }
 
-  sendRequest(){
+  sendRequest() {
     const { userId } = this.props.params
     this.props.friendRequestRequest(userId)
   }
 
-  render(){
-    
-    let checkFriend = false
-    let sentFriendRequest = false
+  render() {
+    let checkFriend: Boolean = false
+    let sentFriendRequest: Boolean = false
     // If User Page show
-    
+
     if (this.props.params && this.props.isLogined){
-      
-      const { 
-        userId 
+
+      const {
+        userId,
       } = this.props.params
-    
-      checkFriend = userIsAlreadyFriend(this.props.currentUser.friends, userId) 
+
+      checkFriend = userIsAlreadyFriend(this.props.currentUser.friends, userId)
       sentFriendRequest = userIsAlreadySentRequest(this.props.currentUser.pendingFriends, userId)
     }
-    
-    const { 
-      profile, 
-      location 
+
+    const {
+      profile,
+      location
     } = this.props.user
-    
-    
+
+
     const {
       isLogined,
       isDashboard
     } = this.props
-    
-    const { 
-      firstName, 
-      lastName, 
-      images, 
-      languages 
+
+    const {
+      firstName,
+      lastName,
+      images,
+      languages
     } = profile
-    
-    const { 
-      city, 
-      province, 
-      country 
+
+    const {
+      city,
+      province,
+      country
     } = location
-    
-    const languagesList = languages.map((lan)=>{
+
+    const languagesList = languages.map((lan) => {
       return (
         <li><Tag tagName={lan.name} /></li>
       )
     })
- 
+
+　　 const imgUrl = images[0] ? images[0].url : undefined
+
     return (
       <div className={sectionProfile}>
-        <ImgProfileXl imgUrl={images[0]} className={sectionProfile__image}/>
+        <ImgProfileXl imgUrl={imgUrl} className={sectionProfile__image}/>
         <div className={section__content}>
           <h1 className={sectionProfile__name}>{firstName} {lastName}</h1>
           <h3 className={sectionProfile__city}>{city}, {province}, {country}</h3>
@@ -96,23 +97,24 @@ class SectionProfile extends Component {
           </ul>
         </div>
         <div className={section__subcontent}>
-          { isLogined && 
+        {/*
+          { isLogined &&
             !isDashboard &&
             !checkFriend &&
             !sentFriendRequest &&
             <BtnPrimary btnText={"Send Request"} onClick={this.sendRequest}/>
           }
-          
-           { isLogined && 
+
+          { isLogined &&
             !isDashboard &&
             !checkFriend &&
             sentFriendRequest &&
-            <p>You have already sent request</p>
-          }
-          
-          { isLogined &&     
+            <p>You have already sent request</p> }
+          */}
+
+          { isLogined &&
             isDashboard &&
-            <Link to="/dashboard/edit">Edit</Link>
+            <Link to="/dashboard/edit">Edit your profile</Link>
           }
         </div>
       </div>
