@@ -1,20 +1,20 @@
 import React, { Component } from 'react'
-import { WithContext as ReactTags } from 'react-tag-input';
+import { WithContext as ReactTags } from 'react-tag-input'
 
-//************************
+// ************************
 // Style
-//************************
+// ************************
 
 import {
   inputTagCountry,
-  tags, 
+  tags,
   tag,
   tagInput,
   tagInputField,
   selected,
   remove,
-  suggestions
-} from './input-tag-country.less'
+  suggestions,
+} from './style.less'
 
 const classNames = {
   tags: tags,
@@ -23,19 +23,21 @@ const classNames = {
   selected: selected,
   tag: tag,
   remove: remove,
-  suggestions: suggestions
+  suggestions: suggestions,
 }
 
 
 class InputTagCountry extends Component {
 
-  constructor(){
+  constructor() {
     super()
     const data = require('json!./country.json')
+
     this.state = {
       tags: [],
-      suggestions: data
+      suggestions: data,
     }
+
     this.handleDelete = this.handleDelete.bind(this)
     this.handleAddition = this.handleAddition.bind(this)
     this.handleDrag = this.handleDrag.bind(this)
@@ -44,16 +46,16 @@ class InputTagCountry extends Component {
   handleDelete(i) {
     let tags = this.state.tags
     tags.splice(i, 1)
-    this.setState({tags: tags})
+    this.setState({ tags: tags })
   }
 
   handleAddition(tag) {
-    let tags = this.state.tags;
+    let tags = this.state.tags
     tags.push({
         id: tags.length + 1,
-        text: tag
+        text: tag,
     });
-    this.setState({tags: tags})
+    this.setState({ tags: tags })
   }
 
   handleDrag(tag, currPos, newPos) {
@@ -62,24 +64,22 @@ class InputTagCountry extends Component {
     // mutate array
     tags.splice(currPos, 1)
     tags.splice(newPos, 0, tag)
-
     this.setState({ tags: tags })
   }
 
   render(){
-    let tags = this.state.tags;
-    let suggestions = this.state.suggestions;
+    let tags = this.state.tags
+    let suggestions = this.state.suggestions
 
     return (
       <div className={inputTagCountry}>
-        Hsds
-        <ReactTags 
+        <ReactTags
           tags={tags}
           suggestions={suggestions}
           handleDelete={this.handleDelete}
           handleAddition={this.handleAddition}
           handleDrag={this.handleDrag}
-          classNames={classNames} 
+          classNames={classNames}
         />
       </div>
     )

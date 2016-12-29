@@ -12,6 +12,11 @@ import {
   FETCH_USER_ERROR,
 } from '../constant/user'
 
+
+import {
+  alertFetchUserError,
+} from './error'
+
 import { endpoint } from '../config'
 const url = endpoint.users
 
@@ -23,27 +28,38 @@ export const fetchUserRequest = (userId) => {
 
   return dispatch => {
     dispatch(fetchUserPending)
+
     fetch(url.getOne(userId))
     .then((response)=>{
-      return response.json()
+      if (response.ok) {
+        return response.json()
+      }
+      throw new Error(response)
     })
     .then((user)=>{
       dispatch(fetchUserSuccess(user))
     })
     .catch((error)=>{
-      dispatch(fetchUserError(error))
+      dispatch(fetchUserErrorHandle(error))
     })
   }
 }
 
-export const fetchUserPending = ({type: FETCH_USER_PENDING})
+const fetchUserPending = ({ type: FETCH_USER_PENDING })
 
-export const fetchUserSuccess = (user) => ({
+const fetchUserSuccess = (user) => ({
   type: FETCH_USER_SUCCESS,
   user
 })
 
-export const fetchUserError = (error) => ({
+const fetchUserErrorHandle = (error) => {
+  return dispatch => {
+    dispatch(alertFetchUserError(error))
+    dispatch(fetchUserError(error))
+  }
+}
+
+const fetchUserError = (error) => ({
   type: FETCH_USER_ERROR,
   error
 })
@@ -53,23 +69,14 @@ export const fetchUserError = (error) => ({
 fetchAllUsersRequest
 ***********************/
 
-export const fetchAllUsersRequest = () => {
+export const fetchAllUsersRequest = () => (dispatch) => {
 
-  return dispatch => {
-    dispatch(fetchAllUsersPending)
+  dispatch(fetchAllUsersPending)
 
-    fetch(url.getAll())
-    .then((response)=>{
-      return response.json()
-    })
-    .then((users)=>{
-      dispatch(fetchAllUsersSuccess(users))
-    })
-    .catch(()=>{
-
-    })
-  }
-
+  fetch(url.getAll())
+  .then((response) => response.json())
+  .then((users) => { dispatch(fetchAllUsersSuccess(users)) })
+  .catch((error)=>{})
 }
 
 const fetchAllUsersPending = ({

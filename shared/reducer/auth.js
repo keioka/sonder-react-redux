@@ -14,7 +14,6 @@ import {
   FETCH_CURRENT_USER_SUCCESS
 } from '../constant/auth'
 
-
 const initialState = {
   isLogined: false,
   isNewUser: true,
@@ -87,7 +86,6 @@ export default function (state = initialState, action) {
     case FETCH_CURRENT_USER_SUCCESS:
       const session: object = camelize(action.session)
       cookie.save('__sonder_t__', action.session.session_token)
-
       return Object.assign({}, state, {
         currentUser: Object.assign({},
           ...state.currentUser,

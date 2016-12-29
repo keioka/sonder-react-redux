@@ -43,8 +43,8 @@ class User extends Component {
     if (typeof userId !== 'undefined') {
       user = allUsers.find(user => user.id === parseInt(userId))
 
-      if (typeof user === 'undefined') {
-        // this.props.fetchUserRequest(userId)
+      if (!isPending && typeof user === 'undefined') {
+        this.props.fetchUserRequest(userId)
       } else {
 
       }
@@ -62,7 +62,7 @@ class User extends Component {
 
     return (
       <div>
-        { true ? <SectionLoading />  : children }
+        { isPending ? <SectionLoading />  : children }
       </div>
     )
   }

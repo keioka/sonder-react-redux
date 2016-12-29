@@ -8,6 +8,7 @@ import { routerReducer } from 'react-router-redux'
 import users from './users'
 import auth from './auth'
 import post from './post'
+import location from './location'
 
 const debug = require('debug')('App:Config')
 debug(`[Reducer]: Configuring Reducer..`)
@@ -17,6 +18,7 @@ const reducers = combineReducers({
   users,
   auth,
   post,
+  location,
   routing: routerReducer,
 })
 

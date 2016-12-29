@@ -13,7 +13,11 @@ import {
 
 class ContainerProfileHeader extends Component {
 
-  static propstype = {
+  static propTypes = {
+    user: PropTypes.object.isRequired,
+  }
+
+  static defaultTypes = {
     user: PropTypes.object.isRequired,
   }
 

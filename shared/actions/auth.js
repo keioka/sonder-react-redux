@@ -148,6 +148,7 @@ export const syncFbAuthDBRequest = (response) => {
       dispatch(sdkFbAuthSuccess)
 
       const data = new FormData()
+
       data.append('body', JSON.stringify(response))
 
       fetch(url.syncFbAuthDBRequest(), {

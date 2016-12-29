@@ -1,13 +1,13 @@
-//************************
+// ************************
 // Modules
-//************************
+// ************************
 
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 
-//************************
+// ************************
 // Component
-//************************
+// ************************
 
 import {
   FormLogin,
@@ -15,9 +15,9 @@ import {
   ImgProfileXs
 } from '../../'
 
-//************************
+// ************************
 // Style
-//************************
+// ************************
 
 import {
   header__nav,
@@ -25,7 +25,7 @@ import {
   header__formModal,
   header__nav__img,
   header__nav__link
-} from './header-nav.less'
+} from './style.less'
 
 //*************************
 // Assets
@@ -33,15 +33,9 @@ import {
 
 
 class HeaderNav extends Component {
-  
-  constructor(){
-    super()
-  }
-  
-  notLogined(){
-    
+
+  notLogined() {
     const { syncFbAuthDBRequest } = this.props
-    
     const notLogined = (
       <ul className={header__nav__ul}>
         <li><BtnFbAuth syncFbAuthDBRequest={syncFbAuthDBRequest} /></li>
@@ -49,15 +43,13 @@ class HeaderNav extends Component {
     )
     return notLogined
   }
-  
-  logined(){
-    
-    const { 
-      currentUser, 
-      logoutRequest 
+
+  logined() {
+    const {
+      currentUser,
+      logoutRequest
     } = this.props
-    
-   
+
     const logined = (
       <ul className={header__nav__ul}>
         <li>
@@ -70,14 +62,14 @@ class HeaderNav extends Component {
         <li onClick={logoutRequest}>Logout</li>
       </ul>
     )
-    
+
     return logined
   }
-  
-  render(){
+
+  render() {
 
   /*  This function would be implement later
-  
+
     const loginComponent = (
       <li>
         <label htmlFor="login">Login</label>
@@ -87,11 +79,9 @@ class HeaderNav extends Component {
         </div>
       </li>
     )
-  */ 
+  */
     const { isLogined } = this.props
-    
-   
-    return (
+    return(
       <nav className={header__nav}>
         {isLogined ? this.logined() : this.notLogined() }
       </nav>

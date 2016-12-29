@@ -10,29 +10,14 @@ import {
 } from './style.less'
 
 
-class ContainerCards extends Component {
+const ContainerCards = props => (
+  <div className={containerCards}>
+    {props.children}
+  </div>
+)
 
-  static propstype = {
-    users: React.PropTypes.array,
-  }
-
-  static defaultType = {
-    users: [],
-  }
-
-  render() {
-    const userCards = this.props.users.map((user) => {
-      return (
-        <CardProfileSquare key={user.id} user={user} />
-      )
-    })
-
-    return (
-      <div className={containerCards}>
-        {userCards}
-      </div>
-    )
-  }
+ContainerCards.propstype = {
+  children: React.PropTypes.node,
 }
 
 export default ContainerCards

@@ -31,6 +31,7 @@ class PageDashboardShow extends Component {
   }
 
   render() {
+    console.log(this)
     const { currentUser, isLogined, acceptHangoutRequest } = this.props
 
     return (

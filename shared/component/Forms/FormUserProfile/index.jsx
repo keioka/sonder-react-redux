@@ -23,17 +23,17 @@ const addressFilter = (addressComponents) => {
 
   const address = {city: "", province: "", country: ""}
 
-  addressComponents.forEach((component)=>{
+  addressComponents.forEach((component) => {
     switch (component.types[0]) {
       case locationType.city:
         address.city = component.long_name
-        break;
+        break
       case locationType.province:
         address.province = component.long_name
-        break;
+        break
       case locationType.country:
         address.country = component.long_name
-        break;
+        break
     }
   })
 
@@ -45,13 +45,13 @@ class FormUserProfile extends Component {
 
   static propstype = {}
 
-  constructor(){
+  constructor() {
     super()
     this.changeHandler = this.changeHandler.bind(this)
     this.changePlaceHnadler = this.changePlaceHnadler.bind(this)
   }
 
-  renderProfileName(){
+  renderProfileName() {
     const { profile } = this.props.currentUser
     const { firstName, lastName } = profile
 
@@ -69,11 +69,11 @@ class FormUserProfile extends Component {
     )
   }
 
-  changeHandler(data, event){
+  changeHandler(data, event) {
     this.props.updateProfileHandler(data)
   }
 
-  renderProfileBirthday(){
+  renderProfileBirthday() {
 
     const { profile } = this.props.currentUser
     const { birthday } = profile
@@ -94,7 +94,7 @@ class FormUserProfile extends Component {
     )
   }
 
-  renderProfileGender(){
+  renderProfileGender() {
     const { profile } = this.props.currentUser
     const { gender } = profile
 
@@ -103,13 +103,13 @@ class FormUserProfile extends Component {
         <label htmlFor="gender">Gender</label>
 
         <span>Male</span>
-       { gender == 1 ?
-           <input type="radio" value="1" name="gender"  checked/> :
-           <input type="radio" value="1" name="gender"  />
+       { gender === 1 ?
+           <input type="radio" value="1" name="gender" checked /> :
+           <input type="radio" value="1" name="gender" />
        }
 
         <span>Female</span>
-        { gender == 2 ?
+        { gender === 2 ?
            <input type="radio" value="2" name="gender" checked/> :
            <input type="radio" value="2" name="gender" />
         }
@@ -117,7 +117,7 @@ class FormUserProfile extends Component {
     )
   }
 
-  changePlaceHnadler(address){
+  changePlaceHnadler(address) {
     const { gmaps, location } = address
     const { address_components } = gmaps
     const { lat, lng } = location
@@ -128,12 +128,9 @@ class FormUserProfile extends Component {
 
   }
 
-  render(){
-
+  render() {
     const { profile, location } = this.props.currentUser
-
     const { firstName, lastName, gender, birthday } = profile
-
     return (
       <form className={form}>
         <h3 className={form__section__title}>User Information</h3>

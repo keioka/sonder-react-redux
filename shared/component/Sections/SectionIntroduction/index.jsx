@@ -7,15 +7,15 @@ import {
 } from './section-introduction.less'
 
 class SectionIntroduction extends Component {
-  
+
   static propstype = {}
-  
-  constructor(){
+
+  constructor() {
     super()
   }
 
-  render(){
-    
+  render() {
+
     return (
       <div className={sectionIntroduction}>
          <article className={sectionArticle}>

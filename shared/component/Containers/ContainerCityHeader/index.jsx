@@ -11,7 +11,7 @@ import {
 } from './style.less'
 
 import {
-  Map
+  Map,
 } from '../../'
 
 class ContainerCity extends Component {
@@ -25,28 +25,22 @@ class ContainerCity extends Component {
   }
 
   render() {
-    const location = {
-      city: 'San Francisco',
-      state: 'CA',
-      country: 'USA',
-    }
-
-    const { city, state, country } = location
-
+    const { city, province, country, latitude, longitude } = this.props.location
+    const geoloaction = { lat: parseFloat(latitude), lng: parseFloat(longitude) }
     return (
       <div className={containerCity}>
         <div className={containerCity__description}>
           <h1 className={fontCity}>{city}</h1>
-          <h3 className={fontState}>{state}</h3>
+          <h3 className={fontState}>{province}</h3>
           <h3 className={fontCountry}>{country}</h3>
           <ul className={containerCity__info}>
-            <li>Travelers: 123</li>
-            <li>Locals: 21</li>
+            <li>Travelers: </li>
+            <li>Locals: </li>
             <li></li>
           </ul>
         </div>
         <div className={containerCity__map}>
-          <Map />
+          <Map center={geoloaction} />
         </div>
       </div>
     )

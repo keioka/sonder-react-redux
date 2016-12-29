@@ -14,7 +14,7 @@ import {
 
 const initialState = {
   isPending: false,
-  allUsers: [],
+  allUsersLocation: [],
 }
 
 export default function(state = initialState, action) {

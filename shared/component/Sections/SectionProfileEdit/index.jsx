@@ -1,31 +1,31 @@
 import React, { Component } from 'react'
 
-import { 
-  FormUserProfile
+import {
+  FormUserProfile,
 } from '../../'
 
 
-import { 
-  sectionProfileEdit
+import {
+  sectionProfileEdit,
 } from './section-profile-edit.less'
 
 class SectionProfileEdit extends Component {
-  
+
   static propstype = {}
-  
-  constructor(){
+
+  constructor() {
     super()
     this.onClick = this.onClick.bind(this)
   }
 
-  onClick(){
+  onClick() {
     this.props.onClick(2)
   }
 
-  render(){
+  render() {
     return (
       <div className={sectionProfileEdit}>
-        <FormUserProfile onClick={this.onClick} {...this.props}/>
+        <FormUserProfile onClick={this.onClick} {...this.props} />
       </div>
     )
   }

@@ -40,6 +40,7 @@ class Dashboard extends Component {
       editProfileUpdate,
       acceptHangoutRequest,
     }))
+
     return (
       <div>
         {children}

@@ -17,17 +17,29 @@ import {
 
 class CardProfileSquare extends Component {
 
-  static propstype = {
+  static propTypes = {
     user: React.PropTypes.objectOf(React.PropTypes.shape({
-      name: React.PropTypes.string.isRequired,
-      city: React.PropTypes.string.isRequired,
-      img: React.PropTypes.string.isRequired
-    })).isRequired
+      profile: React.PropTypes.objectOf(React.PropTypes.shape({
+        firstName: React.PropTypes.string.isRequired,
+        lastName: React.PropTypes.string.isRequired,
+        languages: React.PropTypes.string.isRequired,
+      })).isRequired,
+    })).isRequired,
+  }
+
+  static defaultType = {
+    user: {
+      profile: {
+        firstName: '',
+        lastName: '',
+        languages: [],
+      },
+    },
   }
 
   render() {
-    const { profile, gender, location, id } = this.props.user
-    const { firstName, lastName, languages } = profile
+    const { profile, location, id } = this.props.user
+    const { firstName, lastName, gender, languages } = profile
     const { city, province, country } = location
     return (
       <Link

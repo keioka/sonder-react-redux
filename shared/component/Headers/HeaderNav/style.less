@@ -1,16 +1,12 @@
  @import (reference) "../../../style/index";
 
 .header__nav {
-  .flex();
   .font--nav();
   flex: 0 0 1;
-  justify-content: center;
-  align-items: center;
 }
 
-
 .header__nav__img {
-  display: inline-block; 
+  display: inline-block;
   margin-right: 13px;
   border: 2px solid @color--light-gray;
 }
@@ -23,6 +19,7 @@
 
 .header__nav__ul {
   .flex();
+  flex-direction: row;
   align-items: center;
 }
 
@@ -40,7 +37,7 @@
 }
 
 .header__nav__ul input[type=checkbox] {
-  display: none;  
+  display: none;
 }
 
 .header__nav__ul input[type=checkbox] + .header__formModal {
@@ -58,7 +55,6 @@
   color: @color--secondary;
 }
 
-
 .header__formModal {
   .display--modal();
   opacity: 0;
@@ -67,9 +63,17 @@
   left: 0px;
 }
 
-
 @media screen and (max-width: 767px) {
   .header__nav {
     font-size: 12px;
+  }
+
+  .header__nav__ul {
+    .flex();
+    flex-direction: column;
+  }
+
+  .header__nav__ul li {
+    display: block;
   }
 }

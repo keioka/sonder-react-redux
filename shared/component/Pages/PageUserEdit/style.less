@@ -16,8 +16,9 @@
 }
 
 .pageUserEdit__form {
-  flex: 2;
-  padding: 0px 20px;
+  flex: 1 2 70%;
+  min-width: 70%;
+  padding: 0px 40px;
 }
 
 .pageUserEdit__notification {
@@ -35,21 +36,18 @@
 }
 
 /*******
-Nav
-*/
+  Nav
+********/
 .nav {
-  flex: 1;
-}
-
-.nav ul {
-  position: fixed;
-  width: 20%;
+  flex: 1 1 30%;
+  min-width: 30%;
 }
 
 .nav ul {
   border: 1px solid @color--light-gray;
   border-radius: 4px;
-  box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.1)
+  box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
 }
 
 .nav li {
@@ -64,7 +62,7 @@ Nav
   cursor: pointer;
 }
 
-.nav li:before{
+.nav li:before {
   content: " ";
   position: relative;
   display: inline-block;
@@ -78,7 +76,7 @@ Nav
   color: inherit;
 }
 
-.nav li:hover:before{
+.nav li:hover:before {
   background-color: @color--secondary;
   cursor: pointer;
 }
@@ -98,10 +96,9 @@ Nav
 
 .pageUserEdit__notification svg path {
   @scale: 0.2;
-  transform: scale(@scale); 
-  -webkit-transform: scale(@scale); 
-  -moz-transform: scale(@scale); 
-  -ms-transform: scale(@scale); 
+  transform: scale(@scale);
+  -webkit-transform: scale(@scale);
+  -moz-transform: scale(@scale);
+  -ms-transform: scale(@scale);
   -o-transform: scale(@scale);
 }
-

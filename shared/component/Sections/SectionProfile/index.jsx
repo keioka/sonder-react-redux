@@ -50,8 +50,9 @@ class SectionProfile extends Component {
         userId,
       } = this.props.params
 
-      checkFriend = userIsAlreadyFriend(this.props.currentUser.friends, userId)
-      sentFriendRequest = userIsAlreadySentRequest(this.props.currentUser.pendingFriends, userId)
+      console.log(this)
+      // checkFriend = userIsAlreadyFriend(this.props.currentUser.friends, userId)
+      // sentFriendRequest = userIsAlreadySentRequest(this.props.currentUser.pendingFriends, userId)
     }
 
     const {

@@ -1,7 +1,6 @@
-const API_BASE_URL = __DEV__ ? 'http://localhost:3000' : ''
+const API_BASE_URL = __DEV__ ? 'http://localhost:3000/api/v1' : ''
 
 export let endpoint = {}
-
 
 endpoint.users = {
   getAll: () => (`${API_BASE_URL}/users`),
@@ -13,7 +12,7 @@ endpoint.auth = {
   fetchCurrentUser: () => (`${API_BASE_URL}/current`),
   syncFbAuthDBRequest: ()=> (`${API_BASE_URL}/session`),
   friendRequest: (userId, frinedId) => (`${API_BASE_URL}/users/${userId}/friends/${frinedId}/request`),
-  friendApprove: (userId, frinedId) => (   `${API_BASE_URL}/users/${userId}/friends/${frinedId}/approve`)
+  friendApprove: (userId, frinedId) => (`${API_BASE_URL}/users/${userId}/friends/${frinedId}/approve`)
 }
 
 endpoint.post = {
@@ -21,4 +20,8 @@ endpoint.post = {
   createNewPost: () => (`${API_BASE_URL}/posts`),
   requestHangout: ({ postId, currentUserId }) => (`${API_BASE_URL}/posts/${postId}/users/${currentUserId}/request`),
   acceptHangout: (postId, userId) => (`${API_BASE_URL}/posts/${postId}/users/${userId}/approve`)
+}
+
+endpoint.location = {
+  fetchLocation: locationId => (`${API_BASE_URL}/locations/${locationId}`),
 }

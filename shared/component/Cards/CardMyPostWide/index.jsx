@@ -2,8 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
 
 import {
-  BtnPrimary,
-  BtnRegularSM,
+  TextClickable,
   ImgProfileXs,
   ImgProfileSm,
 } from '../../'
@@ -26,6 +25,7 @@ import {
   cardPostWide__description__header,
   cardPostWide__description__header__profile,
   cardPostWide__description__body,
+  cardPostWide__description__panel,
   profile__name,
   profile__location,
   btn__requests__message,
@@ -64,7 +64,6 @@ class CardMyPostWide extends Component {
   }
 
   onClickShowRequestsHandler(event) {
-    event.preventDefault()
     this.setState({
       showRequestToggle: !this.state.showRequestToggle,
     })
@@ -92,7 +91,7 @@ class CardMyPostWide extends Component {
   }
 
   render() {
-    const { id, date, description, user, location } = this.props.post
+    const { uid, date, description, user, location } = this.props.post
     const { city, province, country } = location
     const profileLocation: string = `${city}, ${province}, ${country}`
 
@@ -108,40 +107,38 @@ class CardMyPostWide extends Component {
     const cardClassName: string = `${cardPostWide__content} ${cardClass}`
 
     return (
-      <Link to={`/posts/${id}`}>
-        <div key={id} className={cardPostWide}>
-          <div className={cardClassName}>
-            <span className={statusTag}>Active</span>
-            <h4 className={cardPostWide__content__date}>{date}January 26th, 2016</h4>
-            <h2 className={cardPostWide__content__time}>10:00 - 12:00</h2>
-            <p className={cardPostWide__content__location}>San Francisco</p>
-            <p className={cardPostWide__content__location}>CA</p>
-            <p className={cardPostWide__content__location}>United States</p>
-          </div>
-          <div className={cardPostWide__description}>
-            <div className={cardPostWide__description__header}>
-              <ImgProfileSm />
-              <div className={cardPostWide__description__header__profile}>
-                <p className={profile__name}>Kei</p>
-                <p className={profile__location}>{profileLocation}</p>
-              </div>
-            </div>
-            <div className={cardPostWide__description__body}>
-              {description} Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei  Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei
-            </div>
-            <div>
-              <BtnRegularSM onClick={this.onClickShowRequestsHandler} text="Show Requests" />
-              <BtnRegularSM text="Detail" />
-            </div>
-          </div>
-          { this.state.showRequestToggle &&
-          <div className={cardPostWide__requests}>
-            <ul>
-              {this.renderRequests()}
-            </ul>
-          </div> }
+      <div key={uid} className={cardPostWide}>
+        <div className={cardClassName}>
+          <span className={statusTag}>Active</span>
+          <h4 className={cardPostWide__content__date}>{date}January 26th, 2016</h4>
+          <h2 className={cardPostWide__content__time}>10:00 - 12:00</h2>
+          <p className={cardPostWide__content__location}>San Francisco</p>
+          <p className={cardPostWide__content__location}>CA</p>
+          <p className={cardPostWide__content__location}>United States</p>
         </div>
-      </Link>
+        <div className={cardPostWide__description}>
+          <div className={cardPostWide__description__header}>
+            <ImgProfileSm />
+            <div className={cardPostWide__description__header__profile}>
+              <p className={profile__name}>Kei</p>
+              <p className={profile__location}>{profileLocation}</p>
+            </div>
+          </div>
+          <div className={cardPostWide__description__body}>
+            {description} Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei  Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei
+          </div>
+          <div className={cardPostWide__description__panel}>
+            <TextClickable text="Show Requests" onClick={this.onClickShowRequestsHandler} />
+            <Link to={`posts/${uid}`}>Detail</Link>
+          </div>
+        </div>
+        { this.state.showRequestToggle &&
+        <div className={cardPostWide__requests}>
+          <ul>
+            {this.renderRequests()}
+          </ul>
+        </div> }
+      </div>
     )
   }
 }
