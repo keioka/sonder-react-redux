@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
+import moment from 'moment'
 
 import {
   TextClickable,
@@ -91,9 +92,18 @@ class CardMyPostWide extends Component {
   }
 
   render() {
-    const { uid, date, description, user, location } = this.props.post
+    const { uid, datetime, description, user, location } = this.props.post
     const { city, province, country } = location
     const profileLocation: string = `${city}, ${province}, ${country}`
+
+    let formatDate
+    let time
+    
+    if (datetime) {
+      const date = new Date(datetime)
+      formatDate = moment.unix(Date.parse(date) / 1000).format("MMM Do YYYY")
+      time = moment.unix(Date.parse(date) / 1000).format("HH:mm a")
+    }
 
     const isEnd = false
     const isMatched = false
@@ -110,11 +120,11 @@ class CardMyPostWide extends Component {
       <div key={uid} className={cardPostWide}>
         <div className={cardClassName}>
           <span className={statusTag}>Active</span>
-          <h4 className={cardPostWide__content__date}>{date}January 26th, 2016</h4>
-          <h2 className={cardPostWide__content__time}>10:00 - 12:00</h2>
-          <p className={cardPostWide__content__location}>San Francisco</p>
-          <p className={cardPostWide__content__location}>CA</p>
-          <p className={cardPostWide__content__location}>United States</p>
+          <h4 className={cardPostWide__content__date}>{formatDate}</h4>
+          <h2 className={cardPostWide__content__time}>{time}</h2>
+          <p className={cardPostWide__content__location}>{city}</p>
+          <p className={cardPostWide__content__location}>{province}</p>
+          <p className={cardPostWide__content__location}>{country}</p>
         </div>
         <div className={cardPostWide__description}>
           <div className={cardPostWide__description__header}>

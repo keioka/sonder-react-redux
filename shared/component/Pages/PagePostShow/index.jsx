@@ -1,8 +1,8 @@
 /* Modules */
 
 import React, { Component } from 'react'
-
-
+import _ from 'lodash'
+import moment from 'moment'
 /* component */
 
 import {
@@ -10,6 +10,7 @@ import {
   ContainerCards,
   ImgProfileSm,
   Map,
+  SectionLoading,
 } from '../../'
 
 
@@ -60,8 +61,8 @@ class PagePostShow extends Component {
 
   componentWillMount() {
     const { postId } = this.props.params
-    const { posts } = this.props
-    const post: Object = findPost(posts, Number.parseInt(postId))
+    const { allPosts } = this.props
+    const post: Object = findPost(allPosts, postId)
 
     if (typeof post === 'undefined') {
       this.props.fetchPostRequest(postId)
@@ -77,41 +78,67 @@ class PagePostShow extends Component {
 
   render() {
     const { postId } = this.props.params
-    const { posts } = this.props
-    const post: Object = findPost(posts, Number.parseInt(postId))
-    const { date, description, isEnd, isMatched, user } = post
+    const { allPosts, isLogined, currentUser } = this.props
+    const post: Object = findPost(allPosts, postId)
 
-    const { firstName, lastName } = user
+    const {
+      datetime,
+      description,
+      isEnd,
+      isMatched,
+      byUser,
+      location
+    } = post
+
+    const { city, province, country, latitude, longitude } = location
+    const address = `${city}, ${province}, ${country}`
+    const { firstName, lastName } = byUser.profile
+
+    let formatDate = ""
+    let time = ""
+
+    if (datetime) {
+      const date = new Date(datetime)
+      formatDate = moment.unix(Date.parse(date) / 1000).format("MMM Do YYYY")
+      time = moment.unix(Date.parse(date) / 1000).format("HH:mm a")
+    }
+
+    const geolocation = { lat: parseFloat(latitude), lng: parseFloat(longitude) }
+
+    let byUserSelf = false
+    if (isLogined) {
+      byUserSelf = byUser.uid == currentUser.uid
+    }
 
     return (
       <div>
-        { !post && null }
+        { !post ? <SectionLoading /> :
         <div className={container}>
           <header className={container__post__header}>
             <div className={post__header__content}>
               <div className={post__header__content__wrapper}>
-                <h2 className={fontDate}>27th Aug, 2016</h2>
-                <h4 className={fontTime}>10:00 - 12:00</h4>
-                <p className={fontLocation}>San Francisco, CA, United States</p>
+                <h2 className={fontDate}>{formatDate}</h2>
+                <h4 className={fontTime}>{time}</h4>
+                <p className={fontLocation}>{address}</p>
               </div>
               <div className={post__content}>
                 <ImgProfileSm />
                 <div className={post__content__profile}>
-                  <p className={profile__name}>{firstName} {lastName}</p>
+                  <p className={profile__name}>{firstName || ''} {lastName || ''}</p>
                   <p className={profile__location}>San Francisco, CA, United States</p>
                 </div>
               </div>
             </div>
             <div className={post__header__map}>
-              <Map />
+              <Map center={geolocation} />
             </div>
           </header>
           <div className={post__header__content__description}>
             <label className={label}>description</label>
-            {description} Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description DescriptionDescription Description Description Description Description Description Description Description Description Description Description Description Description Description
+            {description}
           </div>
 
-        { this.props.isLogined &&
+        { isLogined && !byUserSelf &&
           <div className={section__request}>
             <div className={section__request__form}>
               <form className={form}>
@@ -120,12 +147,14 @@ class PagePostShow extends Component {
               </form>
             </div>
             <div className={section__request__sample}>
-              Sample
+              
             </div>
           </div>
         }
         </div>
+      }
       </div>
+
     )
   }
 }
