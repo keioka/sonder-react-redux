@@ -6,7 +6,7 @@ import reducers from '../reducer'
 const debug = require('debug')("App:Config")
 debug('[Store]: Configuring Store..')
 
-import middlewares from '../middleware/index'
+import middlewares from '../middleware'
 
 function configureStore(initialState){
 

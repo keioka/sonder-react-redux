@@ -60,13 +60,13 @@ import configureStore from '../shared/store/configureStore'
 
 const store = configureStore()
 
-
-
-
-
 //****************
 // App Setting
 //**************** 
+console.log(global)
+console.log(window)
+
+window = {}
 
 debug("Setting Application...")
 

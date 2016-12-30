@@ -8,12 +8,13 @@
     "app": "better-npm-run app",
     "build:server": "better-npm-run server",
     "build:dev": "better-npm-run build:dev",
+    "build:prd": "better-npm-run build:prd",
     "watch": "better-npm-run watch",
     "flow": "flow; test $? -eq 0 -o $? -eq 2"
   },
   "betterScripts": {
     "app": {
-      "command": "npm run build:server && npm run build:dev && nodemon --watch server --exec babel-node -- ./build/server.bundle.js",
+      "command": "npm run build:server && npm run build:prd && nodemon --watch server --exec babel-node -- ./build/server.bundle.js",
       "env": {
         "DEBUG": "App:*"
       }
@@ -21,6 +22,8 @@
     "server": {
       "command": "webpack ---display-error-details --verbose --colors --progress --config ./server/webpack/config.server.js",
       "env": {
+        "NODE_ENV": "production",
+        "BROWSER": false,
         "DEBUG": "Build:*"
       }
     },
@@ -28,8 +31,18 @@
       "command": "webpack --devtool --display-error-details --verbose --colors --progress --config ./client/webpack/config.dev.js",
       "env": {
         "NODE_ENV": "development",
+        "BROWSER": true,
         "DEBUG": "Build:*"
       }
+    },
+    "build:prd": {
+      "command": "webpack --devtool --display-error-details --verbose --colors --progress --config ./client/webpack/config.prod.js",
+      "env": {
+        "NODE_ENV": "production",
+        "BROWSER": true,
+        "DEBUG": "Build:*"
+      }
+
     },
     "watch": {
       "command": "node ./server/webpack/webpack-dev-server.js",
