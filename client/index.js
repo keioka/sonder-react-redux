@@ -22,7 +22,6 @@ if (window.__REDUX_STORE__) {
 }
 
 store.dispatch(fetchCurrentUserRequest())
-store.dispatch(fetchAllUsersRequest())
 
 render(
   <Provider store={store}>

@@ -1,5 +1,7 @@
 import 'whatwg-fetch'
 import cookie from 'react-cookie'
+import _ from 'lodash'
+import camelize from 'camelize'
 
 import {
   LOGIN_REQUEST,
@@ -11,6 +13,9 @@ import {
   FETCH_CURRENT_USER_SUCCESS,
   FETCH_CURRENT_USER_ERROR,
 } from '../constant/auth'
+
+
+import { fetchPostSuccess } from './post'
 
 
 import { endpoint } from '../config'
@@ -51,10 +56,13 @@ export const fetchCurrentUserRequest = () => {
 }
 
 const fetchCurrentUserPending = ({ type: FETCH_CURRENT_USER_PENDING })
+
 const fetchCurrentUserSuccess = session => ({
   type: FETCH_CURRENT_USER_SUCCESS,
+  split: true,
   session,
 })
+
 const fetchCurrentUserError = error => ({
   type: FETCH_CURRENT_USER_ERROR,
   error,
@@ -130,14 +138,28 @@ const sdkFbAuthSuccess = () => ({ type: SDK_FB_AUTH_SUCCESS })
 const sdkFbAuthError = () => ({ type: SDK_FB_AUTH_ERROR })
 const syncfbAuthPending = () => ({ type: SYNC_FB_AUTH_PENDING })
 
+const syncfbAuthSuccessHandler = (response) => {
+  const res = camelize(response)
+  if (!('currentUser' in res)) {
+    throw new Error('Current user is not assigned')
+  }
+  const { currentUser } = res
+  const { posts } = currentUser
+
+  return (dispatch) => {
+    dispatch(fetchPostSuccess(posts))
+    dispatch(syncfbAuthSuccess(res))
+  }
+}
+
 const syncfbAuthSuccess = response => ({
   type: SYNC_FB_AUTH_SUCCESS,
   response,
 })
 
-const syncFbAuthError = response => ({
+const syncFbAuthError = error => ({
   type: SYNC_FB_AUTH_ERROR,
-  response,
+  error,
 })
 
 
@@ -163,7 +185,7 @@ export const syncFbAuthDBRequest = (response) => {
         throw 'No response'
       })
       .then((session) => {
-        dispatch(syncfbAuthSuccess(session))
+        dispatch(syncfbAuthSuccessHandler(session))
       })
       .catch((error) => {
         dispatch(syncFbAuthError(error))

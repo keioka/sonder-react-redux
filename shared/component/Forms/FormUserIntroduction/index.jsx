@@ -16,14 +16,13 @@ import {
 
 class FormUserIntroduction extends Component {
 
-  static propstype = {}
-
   constructor() {
     super()
     this.onChange = this.onChange.bind(this)
   }
 
   onChange(data) {
+    console.log(data)
   }
 
   render() {

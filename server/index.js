@@ -60,10 +60,6 @@ import configureStore from '../shared/store/configureStore'
 
 const store = configureStore()
 
-
-
-
-
 //****************
 // App Setting
 //**************** 
@@ -80,6 +76,7 @@ app.get('*', (req, res) => {
   
   match({history, routes: createRoutes(store), location: req.originalUrl}, (error, redirectLocation, renderProps)=>{
     
+
     const routes = createRoutes(store)
     const components = (
       <Provider store={store} key="provider">

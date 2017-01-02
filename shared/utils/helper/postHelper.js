@@ -20,4 +20,4 @@ export const generateClassFromStatus: Function = (status: Object, classes: Objec
   return classes.isActive
 }
 
-export const findPost: Function = (posts: Array, postId: number): Object => _.find(posts, (post) => post.id === postId)
+export const findPost: Function = (posts: Array, postId: string): Object => _.find(posts, post => { return post.uid === postId })

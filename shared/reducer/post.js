@@ -4,20 +4,23 @@ import {
   FETCH_POST_SUCCESS,
 } from '../constant/post'
 
+import camelize from 'camelize'
+
+const initPost = {
+  uid: '',
+  date: '',
+  description: 'Hi, I am Kei',
+  user: {},
+  location: {},
+  isEnd: false,
+  isMatched: false,
+  mathcedUser: {},
+  requestUser: [],
+}
+
 const initialState = {
-  posts: [{
-    id: 1,
-    uid: '',
-    date: '',
-    description: 'Hi, I am Kei',
-    user: {},
-    location: {},
-    isEnd: false,
-    isMatched: false,
-    mathcedUser: {},
-    requestUser: [],
-  }],
-  postForm: {
+  allPosts: [],
+  form: {
     date: '',
     description: '',
     location: {},
@@ -29,11 +32,11 @@ export default function (state = initialState, action) {
 
     case FETCH_POST_SUCCESS:
       return Object.assign({}, state, {
-        posts: [...state.posts, action.post]
+        allPosts: [...state.allPosts, camelize(action.post)]
       })
     case CREATE_NEW_POST_SUCCESS:
       return Object.assign({}, state, {
-        posts: [...state.posts, action.post]
+        allPosts: [...state.allPosts, camelize(action.post)]
       })
     case SYNC_FB_AUTH_SUCCESS:
 

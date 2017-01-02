@@ -27,7 +27,7 @@ const url:string = endpoint.post
 // *****************
 
 const fetchPostPending = ({ type: FETCH_POST_PENDING })
-const fetchPostSuccess = post => ({
+export const fetchPostSuccess = post => ({
   type: FETCH_POST_SUCCESS,
   post,
 })

@@ -2,12 +2,19 @@
 var webpack = require('webpack');
 var path = require('path');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+const UnminifiedWebpackPlugin = require('unminified-webpack-plugin')
 
 var host = 'localhost';
 var port = '7777';
 
+const dev = process.env.NODE_ENV === 'development' ? true : false;
+const debug = process.env.DEBUG_MODE === 'true' ? true : false;
+const production = process.env.NODE_ENV === 'production' ? true : false;
+
+const browser = process.env.BROWSER
+
 module.exports = {
-  name: 'client:development',
+  name: 'client:production',
   devtool: '#source-map',
   context: path.resolve(__dirname, '..'),
   entry: [
@@ -21,7 +28,6 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
-  debug: true,
   stats: {
     colors: true,
     modules: true,
@@ -32,18 +38,52 @@ module.exports = {
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.NoErrorsPlugin(),
-    new ExtractTextPlugin("style.css")
+    new ExtractTextPlugin("style.css"),
+    new webpack.DefinePlugin({
+      __PROD__: production,
+      __DEV__: dev,
+      __DEBUG__: debug,
+      __BROWSER__: browser
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      minimize: true,
+      compress: {
+        warnings: false
+      }
+    }),
+    new UnminifiedWebpackPlugin()
+
   ],
   module: {
     loaders: [
       {
         test: /\.(js|jsx)$/,
-        loaders: ['babel-loader'],
+        loaders: ['babel-loader?' + JSON.stringify({
+          presets: ["react", "es2015", "stage-0"],
+          plugins: [
+            ["transform-runtime", {
+              helpers: false,
+              polyfill: false,
+              regenerator: true
+            }],
+            "transform-decorators-legacy",
+            "transform-class-properties",
+            "transform-export-extensions"
+         ]
+        })],
         exclude: /node_modules/
       },
       {
-        test: /\.less$/, 
-        loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!less')
+        test: /\.less$/,
+        loaders: ['style', 'css?modules&sourceMap', 'less?sourceMap' ]
+      },
+      {
+        test: /\.svg$/,
+        loaders: ['babel-loader', 'svg-react']
+      },
+      {
+        test: /\.mp4$/,
+        loader: 'file'
       }
     ]
   }

@@ -75,7 +75,7 @@ const assetsPath = path.resolve('assets')
 
 app.use('/assets', Express.static(assetsPath))
 
-app.get('/*', (req, res) =>{
+app.get('/*', (req, res) => {
   const devIndexHtmlPath = path.resolve(__dirname, '../../server/webpack/dev-index.html')
   res.status(200).sendFile(devIndexHtmlPath);
 })
