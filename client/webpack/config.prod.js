@@ -46,6 +46,7 @@ module.exports = {
       __BROWSER__: browser
     }),
     new webpack.optimize.UglifyJsPlugin({
+      minimize: true,
       compress: {
         warnings: false
       }
@@ -58,7 +59,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         loaders: ['babel-loader?' + JSON.stringify({
-          presets: ["react", "es2015", "stage-0", "react-hmre"],
+          presets: ["react", "es2015", "stage-0"],
           plugins: [
             ["transform-runtime", {
               helpers: false,

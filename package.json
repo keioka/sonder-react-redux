@@ -6,28 +6,40 @@
   "scripts": {
     "test": "better-npm-run test",
     "app": "better-npm-run app",
-    "build:server": "better-npm-run server",
-    "build:dev": "better-npm-run build:dev",
-    "build:prd": "better-npm-run build:prd",
+    "build:server:dev": "better-npm-run build:server:dev",
+    "build:server:prd": "better-npm-run build:server:prd",
+    "build:clinet:dev": "better-npm-run build:client:dev",
+    "build:cllient:prd": "better-npm-run build:client:prd",
     "watch": "better-npm-run watch",
     "flow": "flow; test $? -eq 0 -o $? -eq 2"
   },
   "betterScripts": {
     "app": {
-      "command": "npm run build:server && npm run build:prd && nodemon --watch server --exec babel-node -- ./build/server.bundle.js",
+      "command": "pm2 start ./build/server.bundle.js"
+    },
+    "deploy": {
+      "command": "npm run build:server:prd && npm run build:client:prd && pm2 start ./build/server.bundle.js --start",
       "env": {
         "DEBUG": "App:*"
       }
     },
-    "server": {
+    "build:server:dev": {
       "command": "webpack ---display-error-details --verbose --colors --progress --config ./server/webpack/config.server.js",
+      "env": {
+        "NODE_ENV": "developemnt",
+        "BROWSER": false,
+        "DEBUG": "Build:*"
+      }
+    },
+    "build:server:prd": {
+      "command": "webpack -p ---display-error-details --verbose --colors --progress --config ./server/webpack/config.server.js",
       "env": {
         "NODE_ENV": "production",
         "BROWSER": false,
         "DEBUG": "Build:*"
       }
     },
-    "build:dev": {
+    "build:client:dev": {
       "command": "webpack --devtool --display-error-details --verbose --colors --progress --config ./client/webpack/config.dev.js",
       "env": {
         "NODE_ENV": "development",
@@ -35,14 +47,13 @@
         "DEBUG": "Build:*"
       }
     },
-    "build:prd": {
-      "command": "webpack --devtool --display-error-details --verbose --colors --progress --config ./client/webpack/config.prod.js",
+    "build:client:prd": {
+      "command": "webpack -p --devtool --display-error-details --verbose --colors --progress --config ./client/webpack/config.prod.js",
       "env": {
         "NODE_ENV": "production",
         "BROWSER": true,
         "DEBUG": "Build:*"
       }
-
     },
     "watch": {
       "command": "node ./server/webpack/webpack-dev-server.js",
@@ -114,6 +125,8 @@
     "redux-devtools": "^3.3.1",
     "redux-devtools-dock-monitor": "^1.1.1",
     "redux-devtools-log-monitor": "^1.1.1",
+    "shipit-cli": "^2.0.0",
+    "shipit-pm2-nginx": "^0.1.8",
     "style-loader": "^0.13.1",
     "svg-react-loader": "^0.3.7",
     "webpack-dev-middleware": "^1.8.4",

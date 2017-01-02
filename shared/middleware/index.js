@@ -1,7 +1,6 @@
 import thunk from 'redux-thunk'
 import createLogger from 'redux-logger'
 
-import ravenMiddleware from './ravenMiddleware'
 import postMiddleware from './postMiddleware'
 
 const loggerMiddleware = createLogger()
@@ -10,7 +9,10 @@ const middlewares = [thunk]
 
 if (__DEV__ && __DEBUG__) {
   middlewares.push(loggerMiddleware)
-} else if (__PROD__) {
+} else if (__BROWSER__ && __PROD__) {
+  const { RavenMiddleware } = require('./ravenMiddleware')
+  console.log('RavenMiddleware', RavenMiddleware)
+  const ravenMiddleware = RavenMiddleware('https://01f4c18a44604f67b0cfe404b4d1e350@sentry.io/116300')
   middlewares.push(ravenMiddleware)
 }
 

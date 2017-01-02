@@ -63,10 +63,6 @@ const store = configureStore()
 //****************
 // App Setting
 //**************** 
-console.log(global)
-console.log(window)
-
-window = {}
 
 debug("Setting Application...")
 
@@ -80,6 +76,7 @@ app.get('*', (req, res) => {
   
   match({history, routes: createRoutes(store), location: req.originalUrl}, (error, redirectLocation, renderProps)=>{
     
+
     const routes = createRoutes(store)
     const components = (
       <Provider store={store} key="provider">

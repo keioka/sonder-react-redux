@@ -34,7 +34,8 @@ module.exports = {
       __PROD__: production,
       __DEV__: dev,
       __DEBUG__: debug,
-      __BROWSER__: browser
+      __BROWSER__: browser,
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
@@ -52,7 +53,7 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        loaders: ['style', 'css?modules&sourceMap', 'less?sourceMap' ]
+        loader: ExtractTextPlugin.extract('style-loader', 'css!less?sourceMap')
       },
       {
         test: /\.svg$/,
