@@ -13,7 +13,6 @@ import { ReduxAsyncConnect, loadOnServer } from 'redux-async-connect';
 import { Router, Route, RouterContext, browserHistory } from 'react-router'
 import { match } from 'react-router';
 import createHistory from 'react-router/lib/createMemoryHistory';
-import { createMemoryHistory, useQueries } from 'history' 
 
 
 //*************
