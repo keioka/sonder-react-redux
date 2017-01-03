@@ -15,7 +15,7 @@
   },
   "betterScripts": {
     "app": {
-      "command": "pm2 start ./build/server.bundle.js"
+      "command": "pm2 start ./build/server.bundle.js --interpreter ./node_modules/.bin/babel-node"
     },
     "deploy": {
       "command": "npm run build:server:prd && npm run build:client:prd && pm2 start ./build/server.bundle.js --start",
