@@ -9,7 +9,12 @@ const dev = process.env.NODE_ENV === 'development' ? true : false;
 const debug = process.env.DEBUG_MODE === 'true' ? true : false;
 const production = process.env.NODE_ENV === 'production' ? true : false;
 
-const browser = process.env.BROWSER
+const browser = process.env.BROWSER === 'true'
+
+console.log(browser)
+
+const debuggerTool = require('debug')('Server:Config')
+debuggerTool(`[Webpack]: Configuring Webpack.. Browser? ${browser}`)
 
 module.exports = {
   name: 'server',
