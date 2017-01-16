@@ -2,6 +2,7 @@ import 'whatwg-fetch'
 import cookie from 'react-cookie'
 import _ from 'lodash'
 import camelize from 'camelize'
+import snakeCaseKeys from 'snakecase-keys'
 
 import {
   LOGIN_REQUEST,
@@ -9,51 +10,48 @@ import {
   LOGOUT_PENDING,
   LOGOUT_SUCCESS,
   EDIT_PROFILE_UPDATE,
+  EDIT_PROFILE_PENDING,
+  EDIT_PROFILE_SUCCESS,
+  EDIT_PROFILE_ERROR,
   FETCH_CURRENT_USER_PENDING,
   FETCH_CURRENT_USER_SUCCESS,
   FETCH_CURRENT_USER_ERROR,
 } from '../constant/auth'
 
-
 import { fetchPostSuccess } from './post'
-
-
 import { endpoint } from '../config'
 
 const url = endpoint.auth
 const COOKIE = '__sonder_t__'
 
 
-export const fetchCurrentUserRequest = () => {
-
-  return (dispatch) => {
-    const token = cookie.load(COOKIE)
-
+export const fetchCurrentUserRequest = () => (dispatch) => {
+  const token = cookie.load(COOKIE)
+  if (token) {
     dispatch(fetchCurrentUserPending)
+    const data = new FormData()
+    const sessionToken = { token: token }
+    data.append('body', JSON.stringify(sessionToken))
 
-    if (token) {
-      const data = new FormData()
-      data.append('token', token)
-
-      fetch(url.fetchCurrentUser(token), {
-        method: 'POST',
-        body: data,
-      })
-      .then((response) => {
-        if (response.ok) {
-          return response.json()
-        }
-        throw response
-      })
-      .then((currentUser) => {
-        dispatch(fetchCurrentUserSuccess(currentUser))
-      })
-      .catch((error) => {
-        dispatch(fetchCurrentUserError(error))
-      })
-    }
+    fetch(url.fetchCurrentUser(), {
+      method: 'POST',
+      body: data,
+    })
+    .then((response) => {
+      if (response.ok) {
+        return response.json()
+      }
+      throw new Error (response.statusText)
+    })
+    .then((currentUser) => {
+      dispatch(fetchCurrentUserSuccess(currentUser))
+    })
+    .catch((error) => {
+      dispatch(fetchCurrentUserError(error))
+    })
   }
 }
+
 
 const fetchCurrentUserPending = ({ type: FETCH_CURRENT_USER_PENDING })
 
@@ -87,7 +85,6 @@ const loginSuccess = currentUser => ({
   currentUser,
 })
 
-
 export const logoutRequest = () => {
   return (dispatch) => {
     dispatch(logoutPending)
@@ -98,7 +95,6 @@ export const logoutRequest = () => {
 
 const logoutSuccess = ({ type: LOGOUT_SUCCESS })
 const logoutPending = ({ type: LOGOUT_PENDING })
-
 
 //  *************
 //  FB Auth
@@ -114,7 +110,6 @@ import {
   LOGOUT_FB_AUTH_SUCCESS,
   LOGOUT_FB_AUTH_ERROR,
 } from '../constant/auth'
-
 
 /*
 =+ Action Logic +=
@@ -148,11 +143,11 @@ const syncfbAuthSuccessHandler = (response) => {
 
   return (dispatch) => {
     dispatch(fetchPostSuccess(posts))
-    dispatch(syncfbAuthSuccess(res))
+    dispatch(syncFbAuthSuccess(res))
   }
 }
 
-const syncfbAuthSuccess = response => ({
+const syncFbAuthSuccess = response => ({
   type: SYNC_FB_AUTH_SUCCESS,
   response,
 })
@@ -162,7 +157,6 @@ const syncFbAuthError = error => ({
   error,
 })
 
-
 export const syncFbAuthDBRequest = (response) => {
   return (dispatch) => {
     if (typeof response === 'object' && Object.prototype.hasOwnProperty.call(response, 'accessToken')) {
@@ -170,7 +164,6 @@ export const syncFbAuthDBRequest = (response) => {
       dispatch(sdkFbAuthSuccess)
 
       const data = new FormData()
-
       data.append('body', JSON.stringify(response))
 
       fetch(url.syncFbAuthDBRequest(), {
@@ -181,7 +174,6 @@ export const syncFbAuthDBRequest = (response) => {
         if (response.ok) {
           return response.json()
         }
-
         throw 'No response'
       })
       .then((session) => {
@@ -197,13 +189,11 @@ export const syncFbAuthDBRequest = (response) => {
 }
 
 
-const logoutFbAuthRequest = () => {
-  return dispatch => {
-    dispatch(logoutFbAuthPending)
-    window.FB.logout(function(response) {
-      dispatch(logoutFbAuthSuccess)
-    })
-  }
+const logoutFbAuthRequest = () => (dispatch) => {
+  dispatch(logoutFbAuthPending)
+  window.FB.logout(function(response) {
+    dispatch(logoutFbAuthSuccess)
+  })
 }
 
 const logoutFbAuthPending = ({ type: LOGOUT_FB_AUTH_PENDING })
@@ -211,14 +201,56 @@ const logoutFbAuthSuccess = ({ type: LOGOUT_FB_AUTH_SUCCESS })
 const logoutFbAuthERROR = ({ type: LOGOUT_FB_AUTH_ERROR })
 
 
-//  *************
-//  Current User
-//  *************
+// ***************
+//  Edit Profile
+// ***************
+
+const editProfilePending = ({ type: EDIT_PROFILE_PENDING })
+
+const editProfileSuccess = session => ({
+  type: EDIT_PROFILE_SUCCESS,
+  session
+})
+
+const editProfileError = error => ({
+  type: EDIT_PROFILE_ERROR,
+  error
+})
 
 export const editProfileUpdate = profile => ({
   type: EDIT_PROFILE_UPDATE,
   profile,
 })
+
+export const editProfileRequest = () => (dispatch, getState) => {
+  dispatch(editProfilePending)
+  const sessionToken = getState().auth.sessionToken
+  const profileForm = snakeCaseKeys(getState().auth.profileForm)
+
+  if (!sessionToken) {
+    throw new Error(`Session token is not valid`)
+  }
+
+  const data = new FormData()
+  const params = {
+    token: sessionToken,
+    ...profileForm,
+  }
+  data.append('body', JSON.stringify(params))
+
+  fetch(url.updateProfile(), {
+    method: 'POST',
+    body: data,
+  })
+  .then(response => {
+    if (response.ok) {
+      return response.json()
+    }
+    throw new Error(`status code:${response.status}[${response.statusText}]`)
+  })
+  .then((profile) => { dispatch(editProfileSuccess(profile)) })
+  .catch((error) => { dispatch(editProfileError(error)) })
+}
 
 
 //  *************
@@ -281,8 +313,6 @@ export const friendRequestRequest = friendId => {
     })
   }
 }
-
-
 
 //  **********************
 //  Friend Approve

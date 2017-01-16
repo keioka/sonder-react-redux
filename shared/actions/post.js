@@ -20,7 +20,7 @@ import {
 
 import { endpoint } from '../config'
 
-const url:string = endpoint.post
+const url:Object = endpoint.post
 
 // *****************
 // fetchPost
@@ -43,8 +43,7 @@ export const fetchPostRequest = (postId) => (dispatch) => {
     if (response.ok) {
       return response.json()
     }
-
-    throw response.statusText
+    throw new Error(response.statusText)
   })
   .then((response) => {
     dispatch(fetchPostSuccess(response))
@@ -58,13 +57,33 @@ export const fetchPostRequest = (postId) => (dispatch) => {
 // *****************
 // fetchAllPosts
 // *****************
-export const fetchAllPostsRequest = () => {}
+export const fetchAllPostsRequest = () => (dispatch) => {
+  dispatch(fetchAllPostsPending)
+  fetch(url.fetchAllPost())
+  .then((response) => {
+    if (response.ok) {
+      return response.json()
+    }
+    throw new Error(response.statusText)
+  })
+  .then((posts) => {
+    console.log(posts)
+    dispatch(fetchAllPoststSuccess(posts))
+  })
+  .catch((error) => {
+    dispatch(fetchAllPostsPostError(error))
+  })
+}
 
-const fetchAllPostsPending = ({})
+const fetchAllPostsPending = ({type: FETCH_ALL_POSTS_PENDING})
+
 const fetchAllPoststSuccess = posts => ({
+  type: FETCH_ALL_POSTS_SUCCESS,
+  posts,
 })
 const fetchAllPostsPostError = error => ({
-
+  type: FETCH_ALL_POSTS_ERROR,
+  error,
 })
 
 // *****************

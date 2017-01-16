@@ -13,12 +13,18 @@ class SelectHour extends Component {
 
   render() {
     let array = []
+    const initialValue = this.props.value || 0
+
     for (let i = 0; i < 24; i++) {
-      array.push(<option key={i} value={i}>{i<10? '0'+i : ''+i}</option>)
+      if (parseInt(initialValue) === i) {
+        array.push(<option key={i} value={i}>{i<10? '0'+i : ''+i}</option>)
+      } else {
+        array.push(<option key={i} value={i}>{i<10? '0'+i : ''+i}</option>)
+      }
     }
 
     return (
-      <select name="hour" id="hour" onChange={this.onChange}>
+      <select name="hour" id="hour" defaultValue={initialValue} onChange={this.onChange}>
         {array}
       </select>
     )

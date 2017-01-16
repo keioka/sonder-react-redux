@@ -8,15 +8,16 @@ var host = 'localhost';
 var port = '7777';
 
 const dev = process.env.NODE_ENV === 'development' ? true : false;
-const debug = process.env.DEBUG_MODE === 'true' ? true : false;
+const staging = process.env.NODE_ENV === 'staging' ? true : false;
 const production = process.env.NODE_ENV === 'production' ? true : false;
 
-const browser = process.env.BROWSER
+const debug = process.env.DEBUG_MODE === 'true' ? true : false;
+const browser = process.env.BROWSER === 'true'
 
 module.exports = {
   name: 'client:production',
-  devtool: '#source-map',
   context: path.resolve(__dirname, '..'),
+  devtool: 'cheap-module-source-map',
   entry: [
     './index.js'
   ],
@@ -36,23 +37,24 @@ module.exports = {
   progress: true,
   keepalive: true,
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.NoErrorsPlugin(),
     new ExtractTextPlugin("style.css"),
-    new webpack.DefinePlugin({
-      __PROD__: production,
-      __DEV__: dev,
-      __DEBUG__: debug,
-      __BROWSER__: browser
-    }),
+    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
       compress: {
         warnings: false
       }
     }),
-    new UnminifiedWebpackPlugin()
-
+    new webpack.DefinePlugin({
+      __PROD__: production,
+      __STG__: staging,
+      __DEV__: dev,
+      __DEBUG__: debug,
+      __BROWSER__: browser,
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+      }
+    })
   ],
   module: {
     loaders: [

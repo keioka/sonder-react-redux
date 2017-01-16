@@ -2,14 +2,17 @@
 // Modules
 //************************
 
-import React, {PropTypes, Component} from 'react';
-import shouldPureComponentUpdate from 'react-pure-render/function';
-
-import GoogleMap from 'google-map-react';
+import React, {PropTypes, Component} from 'react'
+import shouldPureComponentUpdate from 'react-pure-render/function'
+import GoogleMap from 'google-map-react'
 
 //************************
 // Component
 //************************
+
+import {
+  Pin,
+} from '../'
 
 //************************
 // Style
@@ -23,6 +26,7 @@ from './map.less'
 //*************************
 // Assets
 //*************************
+
 class Map extends Component {
 
   static defaultProps = {
@@ -34,16 +38,17 @@ class Map extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   constructor(props) {
-    super(props);
+    super(props)
+    this.createMapOptions = this.createMapOptions.bind(this)
   }
 
   createMapOptions(maps) {
     return {
-      panControl: false,
-      zoomControl: false,
-      scaleControl: false,
-      rotateControl: false,
-      draggable: false,
+      panControl: this.props.panControl,
+      zoomControl: this.props.zoomControl,
+      scaleControl: this.props.scaleControl,
+      rotateControl: this.props.rotateControl,
+      draggable: this.props.draggable,
       mapTypeControl: false,
       scrollwheel: false,
       styles: [{ stylers: [{ 'gamma': 0.8 }, { 'lightness': 4 }, { 'visibility': 'on' }] }]
@@ -61,8 +66,9 @@ class Map extends Component {
           bootstrapURLKeys={{
             key: 'AIzaSyDnd7VpVekR7d09azP_RQ5Bb_bQHKMkSVo',
             language: 'en'
-          }}
-        />
+          }}>
+            { this.props.pins && this.props.pins.map(pin => <Pin key={pin.google_map_uid} lat={pin.latitude} lng={pin.longitude} text={pin.city} />)}
+          </GoogleMap>
       </div>
     );
   }

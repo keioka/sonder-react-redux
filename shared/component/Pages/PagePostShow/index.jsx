@@ -2,7 +2,9 @@
 
 import React, { Component } from 'react'
 import _ from 'lodash'
+import { Link } from 'react-router'
 import moment from 'moment'
+
 /* component */
 
 import {
@@ -92,7 +94,9 @@ class PagePostShow extends Component {
 
     const { city, province, country, latitude, longitude } = location
     const address = `${city}, ${province}, ${country}`
+    const { uid } = byUser
     const { firstName, lastName } = byUser.profile
+    const { city: cityUser, province: provinceUser, country: countryUser } = byUser.location
 
     let formatDate = ""
     let time = ""
@@ -124,8 +128,8 @@ class PagePostShow extends Component {
               <div className={post__content}>
                 <ImgProfileSm />
                 <div className={post__content__profile}>
-                  <p className={profile__name}>{firstName || ''} {lastName || ''}</p>
-                  <p className={profile__location}>San Francisco, CA, United States</p>
+                  <p className={profile__name}><Link to={`/users/${uid}`}>{firstName} {lastName}</Link></p>
+                  <p className={profile__location}>{cityUser}, {provinceUser}, {countryUser}</p>
                 </div>
               </div>
             </div>
@@ -147,7 +151,7 @@ class PagePostShow extends Component {
               </form>
             </div>
             <div className={section__request__sample}>
-              
+
             </div>
           </div>
         }

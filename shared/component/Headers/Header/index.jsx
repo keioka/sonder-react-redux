@@ -8,9 +8,9 @@ import React, { Component } from 'react'
 // Component
 //************************
 
-import { 
+import {
   HeaderNav,
-  Logo 
+  Logo
 } from '../../'
 
 //************************
@@ -27,19 +27,13 @@ import {
 //*************************
 
 
-
-
 class Header extends Component {
   
-  constructor(){
-    super()
-  }
-
   render(){
     return (
       <header className={header}>
         <div className={header__logo}>
-          <Logo />  
+          <Logo />
         </div>
         <HeaderNav {...this.props} />
       </header>

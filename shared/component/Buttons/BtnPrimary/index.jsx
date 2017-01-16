@@ -8,7 +8,8 @@ import {
 class BtnPrimary extends Component {
 
   static propTypes = {
-    btnText: React.PropTypes.string.isRequired
+    btnText: React.PropTypes.string.isRequired,
+    onClick: React.PropTypes.func.isRequired,
   }
 
   render() {

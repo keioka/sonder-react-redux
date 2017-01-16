@@ -8,7 +8,7 @@ debug('[Store]: Configuring Store..')
 
 import middlewares from '../middleware'
 
-function configureStore(initialState){
+function configureStore(initialState) {
 
   const createStoreWithMiddleware = composeWithDevTools(
     applyMiddleware(...middlewares),

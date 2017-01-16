@@ -47,8 +47,26 @@ class FormUserProfile extends Component {
 
   constructor() {
     super()
-    this.changeHandler = this.changeHandler.bind(this)
-    this.changePlaceHnadler = this.changePlaceHnadler.bind(this)
+    this.onChangeHandler = this.onChangeHandler.bind(this)
+    this.changePlaceHandler = this.changePlaceHandler.bind(this)
+  }
+
+  onChangeHandler(event) {
+    let payload = {}
+    payload[event.target.name] = event.target.value
+  }
+
+  changePlaceHandler(address) {
+    const { gmaps, location, placeId } = address
+    const { address_components } = gmaps
+    const { lat, lng } = location
+    const locationResult = Object.assign({}, addressFilter(address_components), {
+      latitude: lat,
+      longitude: lng,
+      googlePlaceUid: placeId
+    })
+    const payload = { "location": locationResult }
+    this.props.editProfileUpdate(payload)
   }
 
   renderProfileName() {
@@ -69,10 +87,6 @@ class FormUserProfile extends Component {
     )
   }
 
-  changeHandler(data, event) {
-    this.props.updateProfileHandler(data)
-  }
-
   renderProfileBirthday() {
 
     const { profile } = this.props.currentUser
@@ -81,14 +95,17 @@ class FormUserProfile extends Component {
       <div className={form__section}>
         <div className={form__section__block}>
           <label htmlFor="date">Birthday</label>
-          <input
+          <span>{birthday}</span>
+          {/* <input
             type="date"
+            name="birthday"
+            ref={(input) => { this.inputDate = input }}
+            onChange={this.onChangeHandler}
             min="1900-01-01"
             max="2016-01-01"
             ref="birthday"
             defaultValue={birthday}
-            onChange={this.changeHandler()}
-          />
+          /> */}
         </div>
       </div>
     )
@@ -100,33 +117,51 @@ class FormUserProfile extends Component {
 
     return (
       <div className={form__section}>
-        <label htmlFor="gender">Gender</label>
+        <div className={form__section__block}>
+          <label htmlFor="gender">Gender</label>
+          { gender === 0 ? <span>Male</span> : <span>Female</span> }
+        </div>
 
-        <span>Male</span>
-       { gender === 1 ?
-           <input type="radio" value="1" name="gender" checked /> :
-           <input type="radio" value="1" name="gender" />
+       {/* { gender === 0 ?
+           <input
+             type="radio"
+             ref={(input) => { this.inputGender = input }}
+             onChange={this.onChangeHandler}
+             value="1"
+             name="gender"
+             checked
+           /> :
+           <input
+             type="radio"
+             ref={(input) => { this.inputGender = input }}
+             onChange={this.onChangeHandler}
+             value="1"
+             name="gender"
+           />
        }
 
         <span>Female</span>
-        { gender === 2 ?
-           <input type="radio" value="2" name="gender" checked/> :
-           <input type="radio" value="2" name="gender" />
-        }
+        { gender === 1 ?
+           <input
+             type="radio"
+             ref={(input) => { this.inputGender = input }}
+             onChange={this.onChangeHandler}
+             value="2"
+             name="gender"
+             checked
+           /> :
+           <input
+             type="radio"
+             ref={(input) => { this.inputGender = input }}
+             onChange={this.onChangeHandler}
+             value="2"
+             name="gender"
+           />
+        } */}
       </div>
     )
   }
 
-  changePlaceHnadler(address) {
-    const { gmaps, location } = address
-    const { address_components } = gmaps
-    const { lat, lng } = location
-    const locationResult = Object.assign({}, addressFilter(address_components), {
-      latitude: lat,
-      longitude: lng
-    })
-
-  }
 
   render() {
     const { profile, location } = this.props.currentUser
@@ -134,14 +169,13 @@ class FormUserProfile extends Component {
     return (
       <form className={form}>
         <h3 className={form__section__title}>User Information</h3>
-
         {this.renderProfileName()}
         {this.renderProfileBirthday()}
         {this.renderProfileGender()}
 
         <div className={form__section}>
           <label htmlFor="address">Your Location</label>
-          <InputPlaceSearch onSelectPlace={this.changePlaceHnadler}/>
+          <InputPlaceSearch onSelectPlace={this.changePlaceHandler} />
         </div>
 
       </form>

@@ -18,8 +18,8 @@ class ContainerProfile extends Component {
   static propstype = {}
 
   render() {
-    const { user, acceptHangoutRequest, posts } = this.props
-    const { friends, friendRequestedUsers } = user
+    const { user, acceptHangoutRequest } = this.props
+    const { friends, friendRequestedUsers, posts } = user
 
     return (
       <div className={containerProfile}>
@@ -45,7 +45,7 @@ class ContainerProfile extends Component {
           <SectionPostsList
             posts={posts}
             acceptHangoutRequest={acceptHangoutRequest}
-            isByCurrentUser
+            isByCurrentUser={this.props.isByCurrentUser}
           />
 
         </div>

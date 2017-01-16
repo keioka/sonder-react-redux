@@ -1453,7 +1453,7 @@
 	
 	var _redux = __webpack_require__(10);
 	
-	var _reactRouterRedux = __webpack_require__(187);
+	var _reactRouterRedux = __webpack_require__(188);
 	
 	var _users = __webpack_require__(112);
 	
@@ -1669,15 +1669,15 @@
 	
 	var _reactRedux = __webpack_require__(12);
 	
-	var _reduxAsyncConnect = __webpack_require__(189);
+	var _reduxAsyncConnect = __webpack_require__(190);
 	
 	var _reactRouter = __webpack_require__(8);
 	
-	var _createMemoryHistory = __webpack_require__(188);
+	var _createMemoryHistory = __webpack_require__(189);
 	
 	var _createMemoryHistory2 = _interopRequireDefault(_createMemoryHistory);
 	
-	var _webpack = __webpack_require__(194);
+	var _webpack = __webpack_require__(195);
 	
 	var _webpack2 = _interopRequireDefault(_webpack);
 	
@@ -1781,6 +1781,7 @@
 	
 	var app = new _express2.default();
 	
+	app.use('/assets', _express2.default.static('./assets'));
 	app.use('/build', _express2.default.static('./build'));
 	
 	app.get('*', function (req, res) {
@@ -1910,6 +1911,12 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	var isBrowser = (false);
+	
+	if (isBrowser) {
+	  var _FacebookLogin = __webpack_require__(184).default;
+	}
+	
 	var BtnFbAuth = function (_React$Component) {
 	  (0, _inherits3.default)(BtnFbAuth, _React$Component);
 	
@@ -1919,6 +1926,7 @@
 	    var _this = (0, _possibleConstructorReturn3.default)(this, (BtnFbAuth.__proto__ || (0, _getPrototypeOf2.default)(BtnFbAuth)).call(this, props));
 	
 	    _this.responseFacebook = function (response) {
+	      console.log(response);
 	      var syncFbAuthDBRequest = _this.props.syncFbAuthDBRequest;
 	
 	      syncFbAuthDBRequest(response);
@@ -1931,25 +1939,23 @@
 	  (0, _createClass3.default)(BtnFbAuth, [{
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement('div', null)
-	      // { __BROWSER__ ? <FacebookLogin
-	      //   appId="824890790986789"
-	      //   textButton=""
-	      //   autoLoad={false}
-	      //   fields="first_name, last_name, birthday, email, gender,  work, picture, languages, locale"
-	      //   scope="public_profile, user_friends, user_work_history, user_birthday, email, user_photos, user_likes"
-	      //   callback={this.responseFacebook}
-	      //   cssClass={btnFbAuth}
-	      // /> : <span></span> }
-	      ;
+	      return _react2.default.createElement(
+	        'span',
+	        null,
+	        isBrowser === true ? _react2.default.createElement(FacebookLogin, {
+	          appId: '824890790986789',
+	          textButton: '',
+	          autoLoad: false,
+	          fields: 'first_name, last_name, birthday, email, gender,  work, picture, languages, locale',
+	          scope: 'public_profile, user_friends, user_work_history, user_birthday, email, user_photos, user_likes',
+	          callback: this.responseFacebook,
+	          cssClass: _btnFbAuth.btnFbAuth
+	        }) : _react2.default.createElement('span', null)
+	      );
 	    }
 	  }]);
 	  return BtnFbAuth;
 	}(_react2.default.Component);
-	
-	// if (!__BROWSER__) {
-	//   const FacebookLogin = require('react-facebook-login')
-	// }
 	
 	exports.default = BtnFbAuth;
 
@@ -3971,7 +3977,7 @@
 	
 	var _server2 = _interopRequireDefault(_server);
 	
-	var _serializeJavascript = __webpack_require__(193);
+	var _serializeJavascript = __webpack_require__(194);
 	
 	var _serializeJavascript2 = _interopRequireDefault(_serializeJavascript);
 	
@@ -4275,7 +4281,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactHtml5video = __webpack_require__(185);
+	var _reactHtml5video = __webpack_require__(186);
 	
 	var _reactHtml5video2 = _interopRequireDefault(_reactHtml5video);
 	
@@ -4699,7 +4705,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactGeosuggest = __webpack_require__(184);
+	var _reactGeosuggest = __webpack_require__(185);
 	
 	var _reactGeosuggest2 = _interopRequireDefault(_reactGeosuggest);
 	
@@ -5419,7 +5425,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _function = __webpack_require__(186);
+	var _function = __webpack_require__(187);
 	
 	var _function2 = _interopRequireDefault(_function);
 	
@@ -8570,11 +8576,11 @@
 	  value: true
 	});
 	
-	var _reduxThunk = __webpack_require__(192);
+	var _reduxThunk = __webpack_require__(193);
 	
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 	
-	var _reduxLogger = __webpack_require__(191);
+	var _reduxLogger = __webpack_require__(192);
 	
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 	
@@ -9031,7 +9037,7 @@
 	
 	var _redux = __webpack_require__(10);
 	
-	var _reduxDevtoolsExtension = __webpack_require__(190);
+	var _reduxDevtoolsExtension = __webpack_require__(191);
 	
 	var _reducer = __webpack_require__(31);
 	
@@ -9993,64 +9999,70 @@
 /* 184 */
 /***/ function(module, exports) {
 
-	module.exports = require("react-geosuggest");
+	module.exports = require("react-facebook-login");
 
 /***/ },
 /* 185 */
 /***/ function(module, exports) {
 
-	module.exports = require("react-html5video");
+	module.exports = require("react-geosuggest");
 
 /***/ },
 /* 186 */
 /***/ function(module, exports) {
 
-	module.exports = require("react-pure-render/function");
+	module.exports = require("react-html5video");
 
 /***/ },
 /* 187 */
 /***/ function(module, exports) {
 
-	module.exports = require("react-router-redux");
+	module.exports = require("react-pure-render/function");
 
 /***/ },
 /* 188 */
 /***/ function(module, exports) {
 
-	module.exports = require("react-router/lib/createMemoryHistory");
+	module.exports = require("react-router-redux");
 
 /***/ },
 /* 189 */
 /***/ function(module, exports) {
 
-	module.exports = require("redux-async-connect");
+	module.exports = require("react-router/lib/createMemoryHistory");
 
 /***/ },
 /* 190 */
 /***/ function(module, exports) {
 
-	module.exports = require("redux-devtools-extension");
+	module.exports = require("redux-async-connect");
 
 /***/ },
 /* 191 */
 /***/ function(module, exports) {
 
-	module.exports = require("redux-logger");
+	module.exports = require("redux-devtools-extension");
 
 /***/ },
 /* 192 */
 /***/ function(module, exports) {
 
-	module.exports = require("redux-thunk");
+	module.exports = require("redux-logger");
 
 /***/ },
 /* 193 */
 /***/ function(module, exports) {
 
-	module.exports = require("serialize-javascript");
+	module.exports = require("redux-thunk");
 
 /***/ },
 /* 194 */
+/***/ function(module, exports) {
+
+	module.exports = require("serialize-javascript");
+
+/***/ },
+/* 195 */
 /***/ function(module, exports) {
 
 	module.exports = require("webpack");

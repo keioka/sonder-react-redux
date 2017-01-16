@@ -36,6 +36,7 @@ class InputTagLanguage extends Component {
     this.state = {
       tags: [],
       suggestions: data,
+      warning: ""
     }
     this.handleDelete = this.handleDelete.bind(this)
     this.handleAddition = this.handleAddition.bind(this)
@@ -46,6 +47,7 @@ class InputTagLanguage extends Component {
     let tags = this.state.tags
     tags.splice(i, 1)
     this.setState({ tags: tags })
+    this.props.onChange(this.state.tags)
   }
 
   handleAddition(tag) {
@@ -54,16 +56,23 @@ class InputTagLanguage extends Component {
     const isAlready = _.includes(tagList, tag)
     const isValid = _.includes(this.state.suggestions, tag)
 
-    if (isAlready && !isValid) {
-      return null
+    if (isAlready) {
+      this.setState({ warning: "The tag is already exsist" })
     }
 
-    tags.push({
-      id: tags.length + 1,
-      text: tag,
-    })
+    if (isValid) {
+      this.setState({ warning: "Choose language from the list" })
+    }
 
-    this.setState({ tags: tags })
+    if (!isAlready && isValid) {
+      tags.push({
+        id: tags.length + 1,
+        text: tag,
+      })
+
+      this.setState({ tags: tags, warning: "" })
+      this.props.onChange(this.state.tags)
+    }
   }
 
   handleDrag(tag, currPos, newPos) {
@@ -87,6 +96,7 @@ class InputTagLanguage extends Component {
         handleDrag={this.handleDrag}
         classNames={classNames}
       />
+      {this.state.warning}
     </div>
     )
   }

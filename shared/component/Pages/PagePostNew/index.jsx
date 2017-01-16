@@ -59,6 +59,7 @@ class PagePostNew extends Component {
         description: ''
       },
     }
+    console.log(this.state)
     this.onSelectPlace = this.onSelectPlace.bind(this)
     this.onBackBtnClickHandler = this.onBackBtnClickHandler.bind(this)
     this.onFowardBtnClickHandler = this.onFowardBtnClickHandler.bind(this)
@@ -76,13 +77,14 @@ class PagePostNew extends Component {
   }
 
   onSelectPlace(address) {
-    const { label, location, place_id } = address
+    const { label, location, placeId } = address
     const component = addressFilter(address.gmaps.address_components)
+    const locationParams = Object.assign({}, component, transformLatLng(location), { googlePlaceUid: placeId })
     this.setState({
       form: {
         ...this.state.form,
         name: label,
-        location: Object.assign({}, component, transformLatLng(location), { place_id }),
+        location: locationParams,
       },
       mapLocation: location,
     })
@@ -93,7 +95,7 @@ class PagePostNew extends Component {
     const { date, hour, min, description, location } = this.state.form
     const datetime = `${date} ${hour}:${min} `
     const params = {
-      datetime: date,
+      datetime: datetime,
       description: description,
       location: location,
     }
@@ -166,19 +168,18 @@ class PagePostNew extends Component {
   }
 
   renderSectionTwo() {
-    const message = this.state.form.date !== '' ? <span>It is not valid</span> :  <span>It is valid</span>
+    const message = this.state.form.date && this.state.form.hour && this.state.form.min !== '' ? "" : "It is not valid"
     return (
       <div>
         <div className={alert}>{message}</div>
         <section className={section}>
           <input type="date" ref="date" defaultValue={this.state.form.date} min={today} onChange={this.onChangeDate} />
-          <SelectHour onChangeHour={this.onChangeHour} />
+          <SelectHour value={this.state.hour} onChangeHour={this.onChangeHour} />
           <SelectMin onChangeMin={this.onChangeMin} />
         </section>
       </div>
     )
   }
-
 
   renderSectionThree() {
     return (
@@ -215,7 +216,9 @@ class PagePostNew extends Component {
             {this.renderSection()}
           </ReactCSSTransitionGroup>
           <div className={panleControl}>
-            <BtnPrimary btnText="Back" onClick={this.onBackBtnClickHandler} />
+            { this.state.activeSection !== 0 &&
+              <BtnPrimary btnText="Back" onClick={this.onBackBtnClickHandler} />
+            }
             { this.state.activeSection === 2 ?
               <BtnPrimary btnText="Submit" onClick={this.onSubmitHandler} /> :
               <BtnPrimary btnText="Next" onClick={this.onFowardBtnClickHandler} />

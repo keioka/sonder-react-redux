@@ -43,6 +43,10 @@ class InputTagCountry extends Component {
     this.handleDrag = this.handleDrag.bind(this)
   }
 
+  componentDidMount() {
+    this.props.onChange(this.state.tags)
+  }
+
   handleDelete(i) {
     let tags = this.state.tags
     tags.splice(i, 1)
