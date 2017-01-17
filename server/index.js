@@ -87,13 +87,14 @@ app.get('*', (req, res) => {
 
   const history = createHistory(req.originalUrl)
 
-  match({history, routes: createRoutes(store), location: req.originalUrl}, (error, redirectLocation, renderProps) => {
+  match({ history, routes: createRoutes(store), location: req.originalUrl }, (error, redirectLocation, renderProps) => {
     const routes = createRoutes(store)
     const components = (
       <Provider store={store} key="provider">
         <RouterContext {...renderProps} />
       </Provider>
     )
+    
     // React Dom Server Side Rendering
     const app = ReactDOM.renderToStaticMarkup(<HTML components={components} store={store} />)
 
@@ -106,7 +107,7 @@ app.get('*', (req, res) => {
 })
 
 if (__PROD__) {
-  app.listen(8888, () => debug('Server running on localhost:7777'))
+  app.listen(8888, () => debug('Server running on localhost:8888'))
 } else if (__STG__) {
   app.listen(7777, () => debug('Server running on localhost:7777'))
 }

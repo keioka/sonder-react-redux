@@ -62,7 +62,7 @@
       }
     },
     "build:client:stg": {
-      "command": "webpack -p --display-error-details --verbose  --json > webpack.stats.json --colors --progress --config ./client/webpack/config.stg.js",
+      "command": "webpack -p --display-error-details --verbose --colors --progress --config ./client/webpack/config.stg.js",
       "env": {
         "NODE_ENV": "staging",
         "BROWSER": true,

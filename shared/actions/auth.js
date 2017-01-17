@@ -24,7 +24,6 @@ import { endpoint } from '../config'
 const url = endpoint.auth
 const COOKIE = '__sonder_t__'
 
-
 export const fetchCurrentUserRequest = () => (dispatch) => {
   const token = cookie.load(COOKIE)
   if (token) {

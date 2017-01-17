@@ -35,7 +35,6 @@ const mapDispatchToProps = dispatch => bindActionCreators(UserActions, dispatch)
 class Home extends Component {
 
   render() {
-    console.log(this.props.allPosts)
     return (
       <div>
         <div className={container}>

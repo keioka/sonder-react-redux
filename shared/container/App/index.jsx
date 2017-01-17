@@ -25,7 +25,6 @@ import * as AuthActions from '../../actions/auth'
 
 const mapStateToProps = state => {
   const { currentUser, isLogined } = state.auth
-
   return {
     currentUser,
     isLogined,

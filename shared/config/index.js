@@ -1,13 +1,17 @@
 let API_BASE_URL = 'http://localhost:3000/api/v1'
-const __STG__ = __STG__ || false
-const __PROD__ = __PROD__ || false
-const __DEV__ = __DEV__ || true
 
 if (__STG__) {
-  API_BASE_URL = 'http://localhost:3000/api/v1'
+  API_BASE_URL = 'http://35.166.39.16/api/v1'
 } else if (__PROD__) {
   API_BASE_URL = 'http://localhost:3000/api/v1'
 }
+
+const debug = require('debug')("Build")
+debug( __DEV__)
+debug(__STG__)
+debug(__PROD__)
+debug(API_BASE_URL)
+
 
 export let endpoint = {}
 
