@@ -34,10 +34,11 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { auth, editProfileUpdate, acceptHangoutRequest } = this.props
+    const { auth, editProfileUpdate, editProfileRequest, acceptHangoutRequest } = this.props
     const children = React.Children.map(this.props.children, child => React.cloneElement(child, {
       ...auth,
       editProfileUpdate,
+      editProfileRequest,
       acceptHangoutRequest,
     }))
 

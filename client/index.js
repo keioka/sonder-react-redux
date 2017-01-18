@@ -7,8 +7,9 @@ import configureStore from '../shared/store/configureStore'
 import reducers from '../shared/reducer'
 import AppRouter from '../shared/routes'
 
-import { fetchAllUsersRequest } from '../shared/actions/user'
 import { fetchCurrentUserRequest } from '../shared/actions/auth'
+import { fetchUsersLocationRequest } from '../shared/actions/user'
+import { fetchAllPostsRequest } from '../shared/actions/post'
 
 const debug = require('debug')('App:Client')
 debug('Store configure is started..')
@@ -22,6 +23,8 @@ if (window.__REDUX_STORE__) {
 }
 
 store.dispatch(fetchCurrentUserRequest())
+store.dispatch(fetchUsersLocationRequest())
+store.dispatch(fetchAllPostsRequest())
 
 render(
   <Provider store={store}>

@@ -14,7 +14,7 @@ import {
 
 import {
   app,
-} from './app.less'
+} from './style.less'
 
 //  **********
 //  Actions
@@ -25,7 +25,6 @@ import * as AuthActions from '../../actions/auth'
 
 const mapStateToProps = state => {
   const { currentUser, isLogined } = state.auth
-
   return {
     currentUser,
     isLogined,

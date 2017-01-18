@@ -1,3 +1,16 @@
+var fs = require('fs');
+var babelrc = fs.readFileSync(path.resolve('.babelrc'));
+var config;
+
+try {
+  config = JSON.parse(babelrc);
+} catch (err) {
+  console.error('==>     ERROR: Error parsing your .babelrc.');
+  console.error(err);
+}
+
+require('babel-register')(config);
+
 //****************
 // React
 //****************
@@ -13,7 +26,6 @@ import { ReduxAsyncConnect, loadOnServer } from 'redux-async-connect';
 import { Router, Route, RouterContext, browserHistory } from 'react-router'
 import { match } from 'react-router';
 import createHistory from 'react-router/lib/createMemoryHistory';
-import { createMemoryHistory, useQueries } from 'history' 
 
 
 //*************
@@ -62,38 +74,40 @@ const store = configureStore()
 
 //****************
 // App Setting
-//**************** 
+//****************
 
 debug("Setting Application...")
 
 const app = new Express()
 
+app.use('/assets', Express.static('./assets'))
 app.use('/build', Express.static('./build'))
 
 app.get('*', (req, res) => {
 
   const history = createHistory(req.originalUrl)
-  
-  match({history, routes: createRoutes(store), location: req.originalUrl}, (error, redirectLocation, renderProps)=>{
-    
 
+  match({ history, routes: createRoutes(store), location: req.originalUrl }, (error, redirectLocation, renderProps) => {
     const routes = createRoutes(store)
     const components = (
       <Provider store={store} key="provider">
-        <RouterContext {...renderProps} /> 
+        <RouterContext {...renderProps} />
       </Provider>
     )
-      
+    
     // React Dom Server Side Rendering
-    const app = ReactDOM.renderToString(<HTML components={components} store={store}/>)
- 
+    const app = ReactDOM.renderToStaticMarkup(<HTML components={components} store={store} />)
+
     // Response 200
     res.status(200)
-      
+
     // Send response HTML
     res.send(`<!doctype html>\n ${app}`)
-
   })
 })
 
-app.listen(7777, () => debug('Server running on localhost:7777'))
+if (__PROD__) {
+  app.listen(8888, () => debug('Server running on localhost:8888'))
+} else if (__STG__) {
+  app.listen(7777, () => debug('Server running on localhost:7777'))
+}

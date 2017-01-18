@@ -1,5 +1,3 @@
-
-
 /** Logout **/
 
 export const LOGOUT_REQUEST = 'LOGOUT_REQUEST'
@@ -7,16 +5,22 @@ export const LOGOUT_PENDING = 'LOGOUT_PENDING'
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
 export const LOGOUT_ERROR   = 'LOGOUT_ERROR'
 
+
+/** Edit Profile **/
+
 export const EDIT_PROFILE_UPDATE = 'EDIT_PROFILE_UPDATE'
+export const EDIT_PROFILE_PENDING = 'EDIT_PROFILE_PENDING'
+export const EDIT_PROFILE_SUCCESS = 'EDIT_PROFILE_SUCCESS'
+export const EDIT_PROFILE_ERROR = 'EDIT_PROFILE_ERROR'
 
-
-/** Current USer **/
+/** Current User **/
 
 export const FETCH_CURRENT_USER_PENDING    = 'FETCH_CURRENT_USER_PENDING'
 export const FETCH_CURRENT_USER_SUCCESS    = 'FETCH_CURRENT_USER_SUCCESS'
 export const FETCH_CURRENT_USER_ERROR    = 'FETCH_CURRENT_USER_ERROR'
 
-/*** FBAUTH ***/
+
+/*** FB AUTH ***/
 
 export const SDK_FB_AUTH_ERROR    = 'SDK_FB_AUTH_ERROR'
 export const SDK_FB_AUTH_SUCCESS  = 'SDK_FB_AUTH_SUCCESS'
@@ -26,24 +30,17 @@ export const SYNC_FB_AUTH_SUCCESS = 'SYNC_FB_AUTH_SUCCESS'
 export const SYNC_FB_AUTH_ERROR = 'SYNC_FB_AUTH_ERROR'
 
 
-
-
 export const LOGOUT_FB_AUTH_PENDING = 'LOGOUT_FB_AUTH_PENDING'
 export const LOGOUT_FB_AUTH_SUCCESS = 'LOGOUT_FB_AUTH_SUCCESS'
 export const LOGOUT_FB_AUTH_ERROR = 'LOGOUT_FB_AUTH_ERROR'
 
-// Symbol for const? 
+// Symbol for const?
 // https://github.com/reactjs/redux/issues/779
-
-
 
 export const FRIEND_REQUEST_REQUEST = 'FRIEND_REQUEST_REQUEST'
 export const FRIEND_REQUEST_PENDING = 'FRIEND_REQUEST_PENDING'
 export const FRIEND_REQUEST_SUCCESS = 'FRIEND_REQUEST_SUCCESS'
 export const FRIEND_REQUEST_ERROR = 'FRIEND_REQUEST_ERROR'
-
-
-
 
 
 export const FRIEND_APPROVE_REQUEST = 'FRIEND_APPROVE_REQUEST'

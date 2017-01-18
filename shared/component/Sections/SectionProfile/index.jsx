@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
+import moment from 'moment'
 
 import {
   ImgProfileXl,
@@ -17,12 +18,11 @@ import {
 } from './section-profile.less'
 
 const userIsAlreadyFriend = (users, currentUserId) => {
-  return users.filter((user)=>{ return user.id == currentUserId }).length > 0;
+  return users.filter((user)=>{ return user.id == currentUserId }).length > 0
 }
 
-
 const userIsAlreadySentRequest = (users, currentUserShowId) => {
-  return users.filter((user)=>{ return user.id == currentUserShowId }).length > 0;
+  return users.filter((user)=>{ return user.id == currentUserShowId }).length > 0
 }
 
 class SectionProfile extends Component {
@@ -43,14 +43,10 @@ class SectionProfile extends Component {
     let checkFriend: Boolean = false
     let sentFriendRequest: Boolean = false
     // If User Page show
-
     if (this.props.params && this.props.isLogined){
-
       const {
         userId,
       } = this.props.params
-
-      console.log(this)
       // checkFriend = userIsAlreadyFriend(this.props.currentUser.friends, userId)
       // sentFriendRequest = userIsAlreadySentRequest(this.props.currentUser.pendingFriends, userId)
     }
@@ -60,7 +56,6 @@ class SectionProfile extends Component {
       location
     } = this.props.user
 
-
     const {
       isLogined,
       isDashboard
@@ -69,6 +64,8 @@ class SectionProfile extends Component {
     const {
       firstName,
       lastName,
+      gender,
+      birthday,
       images,
       languages
     } = profile
@@ -79,13 +76,9 @@ class SectionProfile extends Component {
       country
     } = location
 
-    const languagesList = languages.map((lan) => {
-      return (
-        <li><Tag tagName={lan.name} /></li>
-      )
-    })
 
-　　 const imgUrl = images[0] ? images[0].url : undefined
+    const imgUrl = images[0] ? images[0].url : undefined
+    const age = moment().diff(birthday, 'years')
 
     return (
       <div className={sectionProfile}>
@@ -93,9 +86,7 @@ class SectionProfile extends Component {
         <div className={section__content}>
           <h1 className={sectionProfile__name}>{firstName} {lastName}</h1>
           <h3 className={sectionProfile__city}>{city}, {province}, {country}</h3>
-          <ul>
-            {languagesList}
-          </ul>
+          <h5 className={sectionProfile__city}>{gender === 0 ? "Male" : "Female"} | {age} years old</h5>
         </div>
         <div className={section__subcontent}>
         {/*

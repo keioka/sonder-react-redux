@@ -39,6 +39,11 @@ export ImgProfileXs from './Imgs/ImgProfileXs'
 export Map from './Map'
 
 
+// **********
+// Pin
+// **********
+export Pin from './Pin'
+
 // ************
 // Logo
 // ************

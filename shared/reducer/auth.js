@@ -11,7 +11,11 @@ import {
   LOGOUT_ERROR,
   SYNC_FB_AUTH_SUCCESS,
   LOGOUT_FB_AUTH_SUCCESS,
-  FETCH_CURRENT_USER_SUCCESS
+  FETCH_CURRENT_USER_SUCCESS,
+  EDIT_PROFILE_UPDATE,
+  EDIT_PROFILE_PENDING,
+  EDIT_PROFILE_SUCCESS,
+  EDIT_PROFILE_ERROR,
 } from '../constant/auth'
 
 const initialState = {
@@ -19,20 +23,11 @@ const initialState = {
   isNewUser: true,
   sessionToken: '',
   profileForm: {
-    first_name: '',
-    last_name: '',
-    birthday: '',
     languages: [],
     images: [],
     interests: [],
     introduction: [{}, {}],
-    lcoation: {
-      city: 'San Francisco',
-      province: 'California',
-      country: 'USA',
-      latitude: undefined,
-      longitude: undefined,
-    },
+    location: {},
   },
   message: {
     userId: [{
@@ -84,7 +79,7 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case FETCH_CURRENT_USER_SUCCESS:
-      const session: object = camelize(action.session)
+      const session: Object = camelize(action.session)
       cookie.save('__sonder_t__', action.session.session_token)
       return Object.assign({}, state, {
         currentUser: Object.assign({},
@@ -111,14 +106,32 @@ export default function (state = initialState, action) {
 
     case SYNC_FB_AUTH_SUCCESS:
       const response = camelize(action.response)
-      cookie.save('__sonder_t__', action.response.session_token)
+      cookie.save('__sonder_t__', action.response.sessionToken)
 
       return Object.assign({}, state, {
+        ...state,
+        ...response,
         currentUser: {
           ...state.currentUser,
           ...response.currentUser,
         },
         isLogined: true,
+      })
+
+    case EDIT_PROFILE_UPDATE:
+      const newProfile = action.profile
+      return Object.assign({}, state, {
+        profileForm: {
+          ...state.profileForm,
+          ...newProfile,
+        }
+      })
+
+    case EDIT_PROFILE_SUCCESS:
+      browserHistory.push('/dashboard')
+      const updatedSession = camelize(action.session)
+      return Object.assign({}, state, {
+        ...updatedSession,
       })
 
     default:

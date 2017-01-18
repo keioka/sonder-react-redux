@@ -22,7 +22,7 @@ import {
 //*************************
 import Logo from './logo.svg'
 
-export default ()=>{
+export default () => {
   return (
     <Link to="/">
       <div className={logo}>

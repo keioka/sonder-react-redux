@@ -37,7 +37,7 @@ class PageUserShow extends Component {
               {...this.props}
               isDashboard={false}
             />
-            <ContainerProfile user={this.props.user} />
+            <ContainerProfile {...this.props} isByCurrentUser={false} />
           </div>
         }
       </div>

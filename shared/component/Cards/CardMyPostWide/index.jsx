@@ -44,7 +44,8 @@ import IconEmail from './email.svg'
 class CardMyPostWide extends Component {
 
   static propTypes = {
-    post: PropTypes.objectOf(React.PropTypes.shape({
+    post: PropTypes.objectOf(PropTypes.shape({
+      uid: PropTypes.string.isRequired,
       id: PropTypes.string.isRequired,
       date: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
@@ -82,7 +83,7 @@ class CardMyPostWide extends Component {
       <li className={cardPostWide__requests__list}>
         <ImgProfileXs />
         <span className={cardPostWide__requests__userName}>Kei</span>
-        <span className={cardPostWide__requests__message}>Hiiiiiiiiiiiiiiiiiii Hiiiiiiiiiiiiiiiiiii Hiiiiiiiiiiiiiiiiiii Hiiiiiiiii iiiiiiiiii Hiiiiiiiiiii iiiiiiii Hiiiiii ii iiiiiiiiiii</span>
+        <span className={cardPostWide__requests__message}>Hi</span>
         <span className={cardPostWide__requests__menu}>
           <IconEmail />
           <button className={btn__requests__accept} onClick={this.onAcceptHandler} >Accept</button>
@@ -92,13 +93,14 @@ class CardMyPostWide extends Component {
   }
 
   render() {
-    const { uid, datetime, description, user, location } = this.props.post
+    const { uid, datetime, description, byUser, location } = this.props.post
+    const { firstName } = byUser.profile
     const { city, province, country } = location
     const profileLocation: string = `${city}, ${province}, ${country}`
 
     let formatDate
     let time
-    
+
     if (datetime) {
       const date = new Date(datetime)
       formatDate = moment.unix(Date.parse(date) / 1000).format("MMM Do YYYY")
@@ -130,12 +132,12 @@ class CardMyPostWide extends Component {
           <div className={cardPostWide__description__header}>
             <ImgProfileSm />
             <div className={cardPostWide__description__header__profile}>
-              <p className={profile__name}>Kei</p>
+              <p className={profile__name}>{firstName}</p>
               <p className={profile__location}>{profileLocation}</p>
             </div>
           </div>
           <div className={cardPostWide__description__body}>
-            {description} Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei  Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei Hi, I am Kei
+            {description}
           </div>
           <div className={cardPostWide__description__panel}>
             <TextClickable text="Show Requests" onClick={this.onClickShowRequestsHandler} />

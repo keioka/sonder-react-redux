@@ -6,12 +6,15 @@ var host = 'localhost';
 var port = '7777';
 
 const dev = process.env.NODE_ENV === 'development' ? true : false;
-const debug = process.env.DEBUG_MODE === 'true' ? true : false;
+const staging = process.env.NODE_ENV === 'staging' ? true : false;
 const production = process.env.NODE_ENV === 'production' ? true : false;
+
+const debug = process.env.DEBUG_MODE === 'true' ? true : false;
+const browser = process.env.BROWSER === 'true'
 
 module.exports = {
   name: 'client:development',
-  devtool: 'source-map',
+  devtool: 'eval',
   context: path.resolve(__dirname, '..'),
   entry: [
     './index.js'
@@ -37,8 +40,13 @@ module.exports = {
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       __PROD__: production,
+      __STG__: staging,
       __DEV__: dev,
-      __DEBUG__: debug
+      __DEBUG__: debug,
+      __BROWSER__: browser,
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+      }
     })
   ],
   module: {

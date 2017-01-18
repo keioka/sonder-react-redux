@@ -109,3 +109,35 @@
 .fontLocation {
   .font--h4();
 }
+
+
+@media screen and (max-width: 767px) {
+  .container {
+    padding: 0;
+  }
+
+  .container__post__header {
+    .flex();
+    padding-bottom: 40px;
+    flex-direction: column-reverse;
+  }
+
+  .post__header__content__wrapper {
+    margin-top: 40px;
+    text-align: left;
+  }
+
+  .post__header__content__description {
+    margin-top: 20px;
+    padding: 0;
+    border: none;
+  }
+
+  .fontLocation {
+    font-size: 0.8rem;
+  }
+
+  .profile__location {
+    font-size: 0.8rem;
+  }
+}

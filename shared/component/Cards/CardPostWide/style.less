@@ -2,6 +2,7 @@
 
 .cardPostWide {
   .card();
+  //align-items: center;
   .flex();
   float: left;
   flex: 1 1 100%;
@@ -18,17 +19,29 @@
 .cardPostWide__content {
   .flex();
   padding: 30px;
-  color: #FFF;
   box-sizing: border-box;
   flex-direction: column;
   flex-wrap: wrap;
   flex: 1 1 40%;
-  min-height: 220px;
+  min-height: 260px;
+}
+
+.cardPostWide__content__date {
+  .font--h5();
+}
+
+.cardPostWide__content__time {
+  .font--h3();
+  color: inherit;
+  margin-bottom: 30px;
+}
+
+.cardPostWide__content__location {
+  .font--h5();
 }
 
 .cardPostWide__description {
   .flex();
-
   padding: 30px;
   align-content: flex-start;
   box-sizing: border-box;
@@ -40,6 +53,14 @@
 .cardPostWide__description__header {
   .flex();
   flex-direction: row;
+}
+
+.cardPostWide__description__panel {
+  margin-top: 10px;
+}
+
+.cardPostWide__description__panel * {
+  margin-right: 20px;
 }
 
 .cardPostWide__description__header__profile {
@@ -71,14 +92,50 @@
 
 .cardPostWide__requests {
   flex: 2 1 100%;
-  opacity: 0;
-  height: 0;
+  border-top: 1px solid @color--light-gray;
 }
 
-.cardPostWide__requests ul li {
-  border-top: 2px solid @color--light-gray;
-  list-style: none;
+.cardPostWide__requests svg {
+  fill: @color--gray;
+  margin-right: 20px;
 }
+
+.cardPostWide__requests__list {
+  .flex();
+  border-top: 1px solid @color--light-gray;
+  align-items: center;
+  list-style: none;
+  padding: 20px 25px;
+}
+
+.cardPostWide__requests__list div {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.cardPostWide__requests__userName {
+  font-size: 14px;
+}
+
+.cardPostWide__requests__message {
+  font-size: 14px;
+  max-width: 240px;
+  display: block;
+  white-space: nowrap;
+  flex: 2 0 240px;
+  margin-left: 2rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cardPostWide__requests__menu {
+  flex: 1 0 140px;
+  .flex();
+  flex-flow: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 
 .statusTag {
   background-color: white;
@@ -93,6 +150,43 @@
   margin-bottom: 15px;
 }
 
-.cardPostWideActive { background-color: @color--secondary; }
+.btn__requests__message {
+  .btn-reset();
+}
+
+.btn__requests__accept {
+  .btn--primary--sm();
+}
+
+.cardPostWideActive { background-color: @color--secondary; color: @color--black; }
 .cardPostWideMatched {  background-color: @color--primary;}
 .cardPostWideEnd { background-color: @color--light-gray; }
+
+
+@media screen and (max-width: 767px) {
+
+  .cardPostWide__content {
+    min-height: 160px;
+  }
+
+  .cardPostWide__description__body {
+    display: none;
+    height: 0;
+    margin: 0; 
+  }
+
+  .cardPostWide__content__location {
+    font-size: 0.7rem;
+    display: inline;
+  }
+
+  .profile__location {
+    font-size: 0.7rem;
+  }
+
+  .cardPostWide__requests__message {
+    width: 0%;
+    flex: 0 0 0%;
+    opacity: 0;
+  }
+}

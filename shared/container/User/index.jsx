@@ -41,7 +41,7 @@ class User extends Component {
     const { userId } = this.props.params
 
     if (typeof userId !== 'undefined') {
-      user = allUsers.find(user => user.id === parseInt(userId))
+      user = allUsers.find(user => user.uid === userId)
 
       if (!isPending && typeof user === 'undefined') {
         this.props.fetchUserRequest(userId)
@@ -52,7 +52,6 @@ class User extends Component {
 
     const children = React.Children.map(this.props.children, child => React.cloneElement(child, {
       user,
-      allUsers,
       fetchUserRequest,
       friendRequestRequest,
       friendApproveRequest,

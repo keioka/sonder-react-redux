@@ -25,14 +25,14 @@ class PageUserEdit extends Component {
 
   constructor() {
     super()
-    this.updateProfileHandler = this.updateProfileHandler.bind(this)
     this.state = {
       active: 0
     }
+    this.onSubmit = this.onSubmit.bind(this)
   }
 
-  updateProfileHandler(data) {
-    this.props.editProfileUpdate(data)
+  onSubmit() {
+    this.props.editProfileRequest()
   }
 
   render() {
@@ -51,18 +51,17 @@ class PageUserEdit extends Component {
               <a href="#info"><li><span>User Information</span></li></a>
               <a href="#profile"><li><span>Introduction</span></li></a>
             </ul>
-            <BtnPrimary btnText={"Update your profile"} />
+            <BtnPrimary btnText={"Update your profile"} onClick={this.onSubmit} />
           </nav>
           <div className={pageUserEdit__form}>
             <div id="image">
               <SectionProfileImageEdit />
             </div>
             <div id="info">
-              <SectionProfileEdit {...this.props} updateProfileHandler={this.updateProfileHandler} />
+              <SectionProfileEdit {...this.props} />
             </div>
             <div id="profile">
-              <SectionIntroductionEdit {...this.props}
-              updateProfileHandler={this.updateProfileHandler}  />
+              <SectionIntroductionEdit {...this.props} />
             </div>
           </div>
         </div>

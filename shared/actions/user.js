@@ -10,8 +10,10 @@ import {
   FETCH_USER_PENDING,
   FETCH_USER_SUCCESS,
   FETCH_USER_ERROR,
+  FETCH_USERS_LOCATION_PENDING,
+  FETCH_USERS_LOCATION_SUCCESS,
+  FETCH_USERS_LOCATION_ERROR,
 } from '../constant/user'
-
 
 import {
   alertFetchUserError,
@@ -66,7 +68,7 @@ const fetchUserError = (error) => ({
 
 
 /**********************
-fetchAllUsersRequest
+* fetchAllUsersRequest
 ***********************/
 
 export const fetchAllUsersRequest = () => (dispatch) => {
@@ -94,8 +96,42 @@ const fetchAllUserError = (error) => ({
 })
 
 
+/******************************
+ * fetchUsersLocationRequest
+ ******************************/
+
+export const fetchUsersLocationRequest = () => (dispatch) => {
+
+  dispatch(fetchUsersLocationPending)
+
+  fetch(url.fetchUsersLocation())
+  .then(response => {
+    if (response.ok) {
+      return response.json()
+    }
+    throw new Error(response.json())
+  })
+  .then(locations => dispatch(fetchUsersLocationSuccess(locations)))
+  .catch(error => dispatch(fetchUsersLocationError(error)))
+}
+
+const fetchUsersLocationPending = ({
+  type: FETCH_USERS_LOCATION_PENDING,
+})
+
+const fetchUsersLocationSuccess = locations => ({
+  type: FETCH_USERS_LOCATION_SUCCESS,
+  locations,
+})
+
+const fetchUsersLocationError = error => ({
+  type: FETCH_USERS_LOCATION_ERROR,
+  error,
+})
+
+
 /**********************
-fetchCityUsersRequest
+* fetchCityUsersRequest
 ***********************/
 
 export const fetchCityUsersRequest = (locationId) => {
