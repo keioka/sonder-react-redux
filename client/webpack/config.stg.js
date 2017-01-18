@@ -39,9 +39,12 @@ module.exports = {
     new ExtractTextPlugin("style.css"),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
+      sourceMap: false,
       minimize: true,
       compress: {
-        warnings: false
+        drop_debugger: true,
+        warnings: false,
+        drop_console: true
       }
     }),
     new webpack.DefinePlugin({
@@ -51,7 +54,7 @@ module.exports = {
       __DEBUG__: debug,
       __BROWSER__: browser,
       'process.env': {
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+        NODE_ENV: JSON.stringify('production')
       }
     })
   ],
@@ -76,7 +79,7 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        loaders: ['style', 'css?modules&sourceMap', 'less?sourceMap' ]
+        loaders: ['style', 'css?modules&sourceMap', 'less?sourceMap']
       },
       {
         test: /\.svg$/,

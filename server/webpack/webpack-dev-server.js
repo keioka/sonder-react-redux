@@ -7,7 +7,7 @@ const debug = require('debug')("Build:Webpack")
 debug('Webpack Hot loader setting is started..')
 
 // ************************
-// React HotWatch 
+// React HotWatch
 // ************************
 var webpackConfig = require('../../client/webpack/config.dev.js');
 
@@ -32,8 +32,6 @@ webpackConfig.output = {
 }
 
 //webpackConfig.module.loaders[0].loaders.push('react-hot', 'jsx?harmony');
-
-
 
 //*************************
 // Dev server configure

@@ -1,9 +1,9 @@
 let API_BASE_URL = 'http://localhost:3000/api/v1'
 
 if (__STG__) {
-  API_BASE_URL = 'http://35.166.39.16/api/v1'
+  API_BASE_URL = 'http://stg-api.sonderexp.com/api/v1'
 } else if (__PROD__) {
-  API_BASE_URL = 'http://localhost:3000/api/v1'
+  API_BASE_URL = 'http://api.sonderexp.com/api/v1'
 }
 
 const debug = require('debug')("Build")

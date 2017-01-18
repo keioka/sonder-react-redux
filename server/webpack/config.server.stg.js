@@ -42,7 +42,7 @@ module.exports = {
       __DEBUG__: debug,
       __BROWSER__: browser,
       'process.env': {
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+        NODE_ENV: JSON.stringify('production')
       }
     }),
     new webpack.optimize.UglifyJsPlugin({

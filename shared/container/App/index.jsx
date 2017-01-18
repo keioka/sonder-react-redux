@@ -14,7 +14,7 @@ import {
 
 import {
   app,
-} from './app.less'
+} from './style.less'
 
 //  **********
 //  Actions
